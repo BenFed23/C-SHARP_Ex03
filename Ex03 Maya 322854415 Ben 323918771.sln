@@ -5,9 +5,9 @@ VisualStudioVersion = 17.14.36603.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex03 Maya 322854415 Ben 323918771", "Ex03 Maya 322854415 Ben 323918771.csproj", "{54ADA26D-6AFD-4888-B577-F8440F924049}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex03.GarageLogic", "..\Ex03.GarageLogic\Ex03.GarageLogic.csproj", "{A1414A3E-BCAA-4ACC-ABD0-C35CE4E0FF2F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex03.ConsoleUI", "Ex03.ConsoleUI\Ex03.ConsoleUI.csproj", "{750BC990-0A7B-42B5-8B1D-441788D5B5E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex03.ConsoleUI", "..\Ex03.ConsoleUI\Ex03.ConsoleUI.csproj", "{750BC990-0A7B-42B5-8B1D-441788D5B5E2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex03.GarageLogic", "Ex03.GarageLogic\Ex03.GarageLogic.csproj", "{A1414A3E-BCAA-4ACC-ABD0-C35CE4E0FF2F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +19,14 @@ Global
 		{54ADA26D-6AFD-4888-B577-F8440F924049}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54ADA26D-6AFD-4888-B577-F8440F924049}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54ADA26D-6AFD-4888-B577-F8440F924049}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A1414A3E-BCAA-4ACC-ABD0-C35CE4E0FF2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A1414A3E-BCAA-4ACC-ABD0-C35CE4E0FF2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A1414A3E-BCAA-4ACC-ABD0-C35CE4E0FF2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A1414A3E-BCAA-4ACC-ABD0-C35CE4E0FF2F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{750BC990-0A7B-42B5-8B1D-441788D5B5E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{750BC990-0A7B-42B5-8B1D-441788D5B5E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{750BC990-0A7B-42B5-8B1D-441788D5B5E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{750BC990-0A7B-42B5-8B1D-441788D5B5E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1414A3E-BCAA-4ACC-ABD0-C35CE4E0FF2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1414A3E-BCAA-4ACC-ABD0-C35CE4E0FF2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1414A3E-BCAA-4ACC-ABD0-C35CE4E0FF2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1414A3E-BCAA-4ACC-ABD0-C35CE4E0FF2F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
