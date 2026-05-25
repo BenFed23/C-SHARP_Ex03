@@ -1,0 +1,2 @@
+C:\Users\benfe\OneDrive\שולחן העבודה\Ex03.GarageLogic\obj\Debug\Ex03.GarageLogic.csproj.AssemblyReference.cache
+C:\Users\benfe\OneDrive\שולחן העבודה\Ex03.GarageLogic\obj\Debug\Ex03.GarageLogic.csproj.CoreCompileInputs.cache
