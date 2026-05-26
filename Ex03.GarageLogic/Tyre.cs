@@ -8,6 +8,11 @@ namespace Ex03.GarageLogic
         string m_menafactureName;
         float m_currentAirPresure;
         float m_maxAirPresure;
+
+        public Tyre(float i_MaxAirPresure)
+        {
+            m_maxAirPresure = i_MaxAirPresure;
+        }
         public bool InflateTire(float i_airToFile) 
         {
             bool succes = true;

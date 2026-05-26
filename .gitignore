@@ -3,3 +3,14 @@
 ################################################################################
 
 /.vs/Ex03 Maya 322854415 Ben 323918771
+# Visual Studio files
+.vs/
+[Bb]in/
+[Oo]bj/
+*.user
+*.suo
+*.cache
+
+# Build results
+DEBUG/
+RELEASE/
