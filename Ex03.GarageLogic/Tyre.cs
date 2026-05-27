@@ -3,7 +3,7 @@
 
 namespace Ex03.GarageLogic
 {
-    internal class Tyre
+    public class Tyre
     {
         string m_menafactureName;
         float m_currentAirPresure;
@@ -13,6 +13,7 @@ namespace Ex03.GarageLogic
         {
             m_maxAirPresure = i_MaxAirPresure;
         }
+
         public bool InflateTire(float i_airToFile) 
         {
             bool succes = true;
