@@ -28,5 +28,28 @@ namespace Ex03.GarageLogic
 
             return succes;
         }
+
+        public float MaxAirPressure
+        {
+            get
+            {
+                return m_maxAirPresure;
+            }
+            set
+            {
+                m_maxAirPresure = value;
+            }
+        }
+        public float CurrentAirPressure
+        {
+            get
+            {
+                return m_currentAirPresure;
+            }
+            set
+            {
+                m_currentAirPresure = value;
+            }
+        }
     }
 }

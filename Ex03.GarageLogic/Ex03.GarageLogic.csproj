@@ -33,20 +33,44 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <None Include=".vs\Ex03.GarageLogic\v17\.suo" />
+    <None Include=".vs\Ex03.GarageLogic\v17\DocumentLayout.backup.json" />
+    <None Include=".vs\Ex03.GarageLogic\v17\DocumentLayout.json" />
     <None Include="App.config" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\Ex03.GarageLogic.csproj.AssemblyReference.cache" />
+    <None Include="obj\Debug\Ex03.GarageLogic.csproj.CoreCompileInputs.cache" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Car.cs" />
     <Compile Include="eCarColor.cs" />
     <Compile Include="eFuelType.cs" />
+    <Compile Include="eGarageStatus.cs" />
     <Compile Include="ElectricCar.cs" />
+    <Compile Include="ElectricMotorcycle.cs" />
+    <Compile Include="ElectricSource.cs" />
+    <Compile Include="eLicenseType.cs" />
+    <Compile Include="EnergySource.cs" />
     <Compile Include="eNumberOfDoors.cs" />
     <Compile Include="Fuel.cs" />
     <Compile Include="FuelCar.cs" />
+    <Compile Include="FuelMotorcycle.cs" />
+    <Compile Include="FuelSource.cs" />
     <Compile Include="FuelTruck.cs" />
+    <Compile Include="GarageManager.cs" />
+    <Compile Include="GarageVehicle.cs" />
+    <Compile Include="Motorcycle.cs" />
+    <Compile Include="obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
     <Compile Include="Tyre.cs" />
     <Compile Include="Vehicle.cs" />
     <Compile Include="VehicleCreator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="obj\Debug\Ex03.GarageLogic.csproj.FileListAbsolute.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\" />
+    <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
