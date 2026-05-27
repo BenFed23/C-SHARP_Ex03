@@ -7,7 +7,7 @@ namespace Ex03.GarageLogic
     {
         bool m_HasRefrigeratedCargo;
         float m_CargoVolume;
-        public FuelTruck(string i_idPlate, string i_ModelName)
+        public FuelTruck(string i_ModelName, string i_LicenseNumber) : base(i_ModelName, i_LicenseNumber)
         {
 
         }
