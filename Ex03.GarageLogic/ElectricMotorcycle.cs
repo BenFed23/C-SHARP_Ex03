@@ -3,7 +3,11 @@
 
 namespace Ex03.GarageLogic
 {
-    internal class ElectricMotorcycle
+    public class ElectricMotorcycle: Motorcycle
     {
+        public ElectricMotorcycle(string i_LicensePlateNumber, string i_ModelName): base(i_LicensePlateNumber, i_ModelName)
+        {
+
+        }
     }
 }

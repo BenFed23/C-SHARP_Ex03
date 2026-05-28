@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    internal class FuelMotorcycle
+    public class FuelMotorcycle: Motorcycle
     {
+        public FuelMotorcycle(string i_LicensePlateNumber, string i_ModelName) : base(i_LicensePlateNumber, i_ModelName)
+        {
+
+        }
     }
 }
