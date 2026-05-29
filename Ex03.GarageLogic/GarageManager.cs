@@ -11,7 +11,8 @@ namespace Ex03.GarageLogic
         {
             if(m_VehiclesInGarage.ContainsKey(i_LicenseNumber))
             {
-                //Exception
+                m_VehiclesInGarage[i_LicenseNumber].SetVehicleStatus(eGarageStatus.InRepair);
+                throw new ArgumentException($"Vehicle with license number {i_LicenseNumber} is already in Garage, changing status to 'In Repair'");
             }
 
             Vehicle newVehicle = VehicleCreator.CreateVehicle(i_VehicleType, i_LicenseNumber, i_ModelName);

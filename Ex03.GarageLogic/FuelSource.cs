@@ -3,25 +3,41 @@
 
 namespace Ex03.GarageLogic
 {
-    public class FuelSource : EnergySource
+    internal class FuelSource
     {
-        private readonly eFuelType m_FuelType;
-
-        public FuelSource(float i_MaxFuelCapacity, eFuelType i_FuelType) : base(i_MaxFuelCapacity)
+        private eFuelType m_fuelType;
+        private float m_fuelAmount;
+        private float m_maxFuelCapacity;
+        public float MaxFuelCapacity
         {
-            m_FuelType = i_FuelType;
-        }
-
-        public void Refuel(float i_AmountOfFuelToAdd, eFuelType i_FuelType)
-        {
-            if(i_FuelType != m_FuelType)
+            get
             {
-                //exception
+                return m_maxFuelCapacity;
+            }
+            set
+            {
+                m_maxFuelCapacity = value;
+            }
+        }
+        public float FuelAmount
+        {
+            get
+            {
+                return m_fuelAmount;
+            }
+            set
+            {
+                m_fuelAmount = value;
+            }
+        }
+        public eFuelType FuelType
+        {
+            get
+            {
+                return m_fuelType;
             }
 
-            this.AddEnergy(i_AmountOfFuelToAdd);
         }
-
 
     }
 }
