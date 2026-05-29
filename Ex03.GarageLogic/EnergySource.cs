@@ -14,7 +14,7 @@ namespace Ex03.GarageLogic
             m_CurrentEnergyAmount = 0;
         }
 
-        protected void AddEnergy (float i_EnergyAmountToAdd)
+        protected void  AddEnergy (float i_EnergyAmountToAdd)
         {
             if(i_EnergyAmountToAdd < 0)
             {

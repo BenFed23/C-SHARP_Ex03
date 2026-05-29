@@ -5,9 +5,10 @@ namespace Ex03.GarageLogic
 {
     public abstract class Vehicle
     {
-        string m_modelName;
-        string m_licenseNumber;
-        float m_energyPercentages;
+       private string m_modelName;
+       private string m_licenseNumber;
+       float m_energyPercentages;
+
         protected Tyre[] m_tyresCollection; 
         public Vehicle(string i_modelName, string i_licenseNumber) 
         {

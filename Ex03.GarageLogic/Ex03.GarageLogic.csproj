@@ -52,7 +52,6 @@
     <Compile Include="eLicenseType.cs" />
     <Compile Include="EnergySource.cs" />
     <Compile Include="eNumberOfDoors.cs" />
-    <Compile Include="Fuel.cs" />
     <Compile Include="FuelCar.cs" />
     <Compile Include="FuelMotorcycle.cs" />
     <Compile Include="FuelSource.cs" />
