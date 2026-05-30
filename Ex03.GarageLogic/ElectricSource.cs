@@ -9,7 +9,7 @@ namespace Ex03.GarageLogic
 
         }
 
-        public void charge(float i_HoursToAdd)
+        public void chargeElectricVehicle(float i_HoursToAdd)
         {
             this.AddEnergy(i_HoursToAdd);
         }
