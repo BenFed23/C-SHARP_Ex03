@@ -12,6 +12,6 @@ namespace Ex03.ConsoleUI
         RefuelVehicle = 6,
         ChargeVehicle = 7, 
         ShowFullVehicleDetails = 8,
-        Exit
+        Exit = 9
     }
 }

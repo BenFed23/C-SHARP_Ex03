@@ -11,7 +11,6 @@ namespace Ex03.GarageLogic
 
         public Motorcycle(string i_LicensePlateNumber, string i_ModelName) : base(i_LicensePlateNumber, i_ModelName)
         {
-            //InitTyres(k_AmountOfWheels, k_MaxAirPressure);
         }
     }
 }

@@ -17,15 +17,6 @@ namespace Ex03.GarageLogic
             m_tyresCollection = null;
         }
 
-        protected void FillTyresToMaxAirPressure(int i_AmountOfWheels, float i_MaxAirPressure)
-        {
-            m_tyresCollection = new Tyre[i_AmountOfWheels];
-            for (int i = 0; i < i_AmountOfWheels; i++)
-            {
-                m_tyresCollection[i] = new Tyre(i_MaxAirPressure);
-            }
-        }
-
         public virtual void Refuel(float i_AmountOfFuelToAdd, eFuelType i_FuelType)
         {
             throw new ArgumentException("This vehicle isn't run by fuel");
