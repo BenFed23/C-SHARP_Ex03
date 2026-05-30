@@ -33,6 +33,11 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("Please enter the vehicle's details:");
             Console.WriteLine("Enter vehicle type:");
             string userVehicleType = Console.ReadLine();
+            if(!VehicleCreator.SupportedTypes.Contains(userVehicleType))
+            {
+                throw new ArgumentException($"The vehicle type '{userVehicleType}' is not supported");
+            }
+
             getVehicleParamsAccordingToType(userVehicleType);
         }
 
