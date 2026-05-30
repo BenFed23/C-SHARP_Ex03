@@ -41,5 +41,29 @@ namespace Ex03.GarageLogic
                 throw new ArgumentException("You entered an invalid vehicle type");
             }
         }
+
+        public void RefuelVehicle(string i_LicensePlateNumber, eFuelType i_FuelType, float i_AmountOfFuelToAdd)
+        {
+            GarageVehicle currentGarageVehicle = getVehicleByLicensePlateNumber(i_LicensePlateNumber);
+            Vehicle currentVehicle = currentGarageVehicle.GetVehicle();
+            currentVehicle.Refuel(i_AmountOfFuelToAdd, i_FuelType);
+        }
+
+        public void ChargeVehicle(string i_LicensePlateNumber, float i_AmountOfMinutesToAdd)
+        {
+            GarageVehicle currentGarageVehicle = getVehicleByLicensePlateNumber(i_LicensePlateNumber);
+            Vehicle currentVehicle = currentGarageVehicle.GetVehicle();
+            currentVehicle.Charge(i_AmountOfMinutesToAdd);
+        }
+
+        private GarageVehicle getVehicleByLicensePlateNumber(string i_LicensePlateNumber)
+        {
+            if(!m_VehiclesInGarage.TryGetValue(i_LicensePlateNumber, out GarageVehicle desiredGarageVehicle))
+            {
+                throw new ArgumentException($"Vehicle with license number {i_LicensePlateNumber} was not found in the garage");
+            }
+
+            return desiredGarageVehicle;
+        }
     }
 }

@@ -8,9 +8,127 @@ namespace Ex03.ConsoleUI
     {
         private GarageLogic.GarageManager garageManager;
 
-        public void GarageMenu()
+        public void DisplayGarageMenu()
         {
+            bool isExitPressed = false;
 
+            while(!isExitPressed)
+            {
+                printMenuOptions();
+                string userChoiceInput = Console.ReadLine();
+
+                try
+                {
+                    if (!Enum.TryParse(userChoiceInput, out eMenuOptions userChoice))
+                    {
+                        throw new FormatException("You must choose a number from menu");
+                    }
+
+                    executeUserChoice(userChoice, ref isExitPressed);
+                }
+                catch (FormatException invalidInputException)
+                {
+                    Console.WriteLine("Invalid Input: {0}", invalidInputException.Message);
+                }
+                catch (ValueRangeException invalidRangeException)
+                {
+                    Console.WriteLine("Invalid Range: {0}", invalidRangeException.Message);
+                }
+            }
+        }
+
+        private void printMenuOptions()
+        {
+            string menuTemplate = @"*** Welcome to the Garage Management System ***
+            Please choose one of the following options:
+            {0}. Load vehicle data from file
+            {1}. Add a new vehicle to the garage
+            {2}. Display license numbers of vehicles in the garage
+            {3}. Change a vehicle's status in garage
+            {4}. Inflate tires to maximum air pressure
+            {5}. Refuel a fuel-powered vehicle
+            {6}. Charge an electric vehicle
+            {7}. Display full vehicle information
+            {8}. Exit
+
+            Enter your choice: ";
+
+            string formattedMenu = string.Format(
+                menuTemplate,
+                (int)eMenuOptions.LoadDataFromDBFile,
+                (int)eMenuOptions.AddNewVehicleToGarage, 
+                (int)eMenuOptions.ShowListOfLicensePlateNumbers,
+                (int)eMenuOptions.ChangeVehicleStateInGarage,
+                (int)eMenuOptions.InflateTiresToMaxAirPressure,
+                (int)eMenuOptions.RefuelVehicle,
+                (int)eMenuOptions.ChargeVehicle,
+                (int)eMenuOptions.ShowFullVehicleDetails,
+                (int)eMenuOptions.Exit
+            );
+
+            Console.Write(formattedMenu);
+        }
+
+        private void executeUserChoice(eMenuOptions i_UserMenuChoice, ref bool io_IsExitPressed)
+        {
+            switch(i_UserMenuChoice)
+            {
+                case eMenuOptions.LoadDataFromDBFile:
+                    break;
+                case eMenuOptions.AddNewVehicleToGarage:
+                    break;
+                case eMenuOptions.ShowListOfLicensePlateNumbers:
+                    break;
+                case eMenuOptions.ChangeVehicleStateInGarage:
+                    break;
+                case eMenuOptions.InflateTiresToMaxAirPressure:
+                    break;
+                case eMenuOptions.RefuelVehicle:
+                    executeRefuelOption();
+                    break;
+                case eMenuOptions.ChargeVehicle:
+                    executeChargeOption();
+                    break;
+                case eMenuOptions.ShowFullVehicleDetails:
+                    break;
+                case eMenuOptions.Exit:
+                    io_IsExitPressed = true;
+                    break;
+            }
+        }
+
+        private void executeRefuelOption()
+        {
+            getRefuelValuesFromUser(out string vehicleLicenseNumber, out string stringFuelType, out string stringAmountOfFuelToAdd);
+            Enum.TryParse(stringFuelType, out eFuelType fuelType);
+            float.TryParse(stringAmountOfFuelToAdd, out float amountOfFuelToAdd);
+            garageManager.RefuelVehicle(vehicleLicenseNumber, fuelType, amountOfFuelToAdd);
+        }
+
+        private void executeChargeOption()
+        {
+            getChangeValuesFromUser(out string vehicleLicenseNumber, out string stringAmountOfMinutesToAdd);
+            float.TryParse(stringAmountOfMinutesToAdd, out float amountOfMinutesToAdd);
+            garageManager.ChargeVehicle(vehicleLicenseNumber, amountOfMinutesToAdd);
+        }
+
+        private void getChangeValuesFromUser(out string o_VehicleLicenseNumber, out string o_AmountOfMinutesToAdd)
+        {
+            Console.WriteLine("Please enter license plate number:");
+            o_VehicleLicenseNumber = Console.ReadLine();
+            Console.WriteLine("Please enter amount of minutes to add:");
+            o_AmountOfMinutesToAdd = Console.ReadLine();
+        }
+
+        private void getRefuelValuesFromUser(out string o_VehicleLicenseNumber, out string o_FuelType, out string o_AmountOfFuelToAdd)
+        {
+            Console.WriteLine("Please enter license plate number:");
+            o_VehicleLicenseNumber = Console.ReadLine();
+            Console.WriteLine("Please enter fuel type:");
+            o_FuelType = Console.ReadLine();
+            // add validate fuel type method
+            Console.WriteLine("Please enter amount of fuel to add:");
+            o_AmountOfFuelToAdd = Console.ReadLine();
         }
 
         private void getNewVehicleFromUser()
