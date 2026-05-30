@@ -33,6 +33,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <None Include=".vs\Ex03.ConsoleUI.csproj.dtbcache.json" />
+    <None Include=".vs\Ex03.ConsoleUI\FileContentIndex\107accb0-484f-4da0-8b19-5998d5fa1c03.vsidx" />
+    <None Include=".vs\Ex03.ConsoleUI\FileContentIndex\b03ce9d5-8d32-4f56-b916-df393b075f08.vsidx" />
+    <None Include=".vs\Ex03.ConsoleUI\FileContentIndex\cce9f5cb-1a02-4631-bea4-21026ab50ec9.vsidx" />
+    <None Include=".vs\Ex03.ConsoleUI\FileContentIndex\e9cb49ec-4089-4941-81be-f72a418df2a1.vsidx" />
+    <None Include=".vs\Ex03.ConsoleUI\FileContentIndex\fc2174a7-598a-4d8f-be27-df3f17f65c57.vsidx" />
+    <None Include=".vs\Ex03.ConsoleUI\v17\.suo" />
+    <None Include=".vs\Ex03.ConsoleUI\v17\DocumentLayout.backup.json" />
+    <None Include=".vs\Ex03.ConsoleUI\v17\DocumentLayout.json" />
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
@@ -41,7 +50,18 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GarageUI.cs" />
+    <Compile Include="obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
     <Compile Include="Program.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ex03.GarageLogic\Ex03.GarageLogic.csproj">
+      <Project>{a1414a3e-bcaa-4acc-abd0-c35ce4e0ff2f}</Project>
+      <Name>Ex03.GarageLogic</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

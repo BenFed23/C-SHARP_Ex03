@@ -61,7 +61,6 @@
     <Compile Include="Motorcycle.cs" />
     <Compile Include="obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
     <Compile Include="Tyre.cs" />
-    <Compile Include="ValueRangeException.cs" />
     <Compile Include="Vehicle.cs" />
     <Compile Include="VehicleCreator.cs" />
   </ItemGroup>
