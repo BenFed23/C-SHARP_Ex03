@@ -42,6 +42,12 @@ namespace Ex03.GarageLogic
             }
         }
 
+        public void ChangeStateOfGarageVehicle(string i_LicensePlateNumber, eGarageStatus i_NewGarageState)
+        {
+            GarageVehicle currentGarageVehicle = getVehicleByLicensePlateNumber(i_LicensePlateNumber);
+            currentGarageVehicle.SetVehicleStatus(i_NewGarageState);
+        }
+
         public void RefuelVehicle(string i_LicensePlateNumber, eFuelType i_FuelType, float i_AmountOfFuelToAdd)
         {
             GarageVehicle currentGarageVehicle = getVehicleByLicensePlateNumber(i_LicensePlateNumber);

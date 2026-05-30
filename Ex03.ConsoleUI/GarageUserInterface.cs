@@ -80,6 +80,7 @@ namespace Ex03.ConsoleUI
                 case eMenuOptions.ShowListOfLicensePlateNumbers:
                     break;
                 case eMenuOptions.ChangeVehicleStateInGarage:
+                    executeChangeVehicleState();
                     break;
                 case eMenuOptions.InflateTiresToMaxAirPressure:
                     break;
@@ -97,6 +98,21 @@ namespace Ex03.ConsoleUI
             }
         }
 
+        private void executeChangeVehicleState()
+        {
+            getChangeStateValuesFromUser(out string vehicleLicenseNumber, out string newVehicleState);
+            Enum.TryParse(newVehicleState, out eGarageStatus newGarageVehicleStatus);
+            garageManager.ChangeStateOfGarageVehicle(vehicleLicenseNumber, newGarageVehicleStatus);
+        }
+
+        private void getChangeStateValuesFromUser(out string o_VehicleLicenseNumber, out string o_NewVehicleState)
+        {
+            Console.WriteLine("Please enter license plate number:");
+            o_VehicleLicenseNumber = Console.ReadLine();
+            Console.WriteLine("Please enter new vehicle state:");
+            o_NewVehicleState = Console.ReadLine();
+        }
+
         private void executeRefuelOption()
         {
             getRefuelValuesFromUser(out string vehicleLicenseNumber, out string stringFuelType, out string stringAmountOfFuelToAdd);
@@ -107,12 +123,12 @@ namespace Ex03.ConsoleUI
 
         private void executeChargeOption()
         {
-            getChangeValuesFromUser(out string vehicleLicenseNumber, out string stringAmountOfMinutesToAdd);
+            getChargeValuesFromUser(out string vehicleLicenseNumber, out string stringAmountOfMinutesToAdd);
             float.TryParse(stringAmountOfMinutesToAdd, out float amountOfMinutesToAdd);
             garageManager.ChargeVehicle(vehicleLicenseNumber, amountOfMinutesToAdd);
         }
 
-        private void getChangeValuesFromUser(out string o_VehicleLicenseNumber, out string o_AmountOfMinutesToAdd)
+        private void getChargeValuesFromUser(out string o_VehicleLicenseNumber, out string o_AmountOfMinutesToAdd)
         {
             Console.WriteLine("Please enter license plate number:");
             o_VehicleLicenseNumber = Console.ReadLine();
