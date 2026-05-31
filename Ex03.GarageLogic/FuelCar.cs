@@ -3,14 +3,19 @@
 
 namespace Ex03.GarageLogic
 {
-    internal class FuelCar: Car
+    public class FuelCar: Car
     {
-        private string m_idPlate;
-        private string m_ModelName;
-        private FuelSource fuelTank;
+        protected FuelSource m_FuelSource;
+
         public FuelCar( string i_idPlate, string  i_ModelName)
         {
 
+        }
+
+        public override void Refuel(float i_AmountOfFuelToAdd, eFuelType i_FuelType)
+        {
+
+            m_FuelSource.RefuelVehicle(i_AmountOfFuelToAdd, i_FuelType);
         }
     }
 }

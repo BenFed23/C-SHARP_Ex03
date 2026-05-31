@@ -1,2 +1,4 @@
 C:\Users\benfe\OneDrive\שולחן העבודה\Ex03.GarageLogic\obj\Debug\Ex03.GarageLogic.csproj.AssemblyReference.cache
 C:\Users\benfe\OneDrive\שולחן העבודה\Ex03.GarageLogic\obj\Debug\Ex03.GarageLogic.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\C-SHARP_Ex03\Ex03.GarageLogic\obj\Debug\Ex03.GarageLogic.csproj.AssemblyReference.cache
+C:\Users\User\source\repos\C-SHARP_Ex03\Ex03.GarageLogic\obj\Debug\Ex03.GarageLogic.csproj.CoreCompileInputs.cache

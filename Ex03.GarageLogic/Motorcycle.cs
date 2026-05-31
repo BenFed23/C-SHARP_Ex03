@@ -9,9 +9,8 @@ namespace Ex03.GarageLogic
         private const int k_AmountOfWheels = 2;
         private const int k_MaxAirPressure = 30;
 
-        public Motorcycle(string i_ModelName, string i_LicenseNumber) : base(i_ModelName, i_LicenseNumber)
+        public Motorcycle(string i_LicensePlateNumber, string i_ModelName) : base(i_LicensePlateNumber, i_ModelName)
         {
-            InitTyres(k_AmountOfWheels, k_MaxAirPressure);
         }
     }
 }

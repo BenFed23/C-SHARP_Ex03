@@ -4,7 +4,7 @@ namespace Ex03.GarageLogic
 {
     public class GarageVehicle
     {
-        private readonly Vehicle r_Vehicle;
+        protected readonly Vehicle r_Vehicle;
         private string m_OwnerName;
         private string m_OwnerPhone;
         private eGarageStatus m_VehicleStatus;
@@ -16,17 +16,15 @@ namespace Ex03.GarageLogic
             m_OwnerPhone = i_OwnerPhone;
             m_VehicleStatus = eGarageStatus.InRepair;
         }
-        public eGarageStatus GarageStatus
+
+        public void SetVehicleStatus(eGarageStatus i_NewVehicleStatus)
         {
-            get
-            {
-                return m_VehicleStatus; 
-            }
-            set
-            {
-                m_VehicleStatus = value;
-            }
+            m_VehicleStatus = i_NewVehicleStatus;
         }
-        
+
+        public Vehicle GetVehicle()
+        {
+           return r_Vehicle;
+        }
     }
 }

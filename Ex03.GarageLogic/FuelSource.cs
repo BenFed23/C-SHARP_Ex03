@@ -3,7 +3,7 @@
 
 namespace Ex03.GarageLogic
 {
-    internal class FuelSource
+    public class FuelSource : EnergySource
     {
         private eFuelType m_fuelType;
         private float m_fuelAmount;
@@ -38,6 +38,18 @@ namespace Ex03.GarageLogic
             }
        
 
+        }
+
+        public void RefuelVehicle(float i_AmountOfFuelToAdd, eFuelType i_FuelType)
+        {
+            if (i_FuelType == m_fuelType)
+            {
+                this.AddEnergy(i_AmountOfFuelToAdd);
+            }
+            else
+            {
+                throw new ArgumentException("Wrong fuel type");
+            }
         }
 
     }
