@@ -12,6 +12,7 @@ namespace Ex03.GarageLogic
         public Tyre(float i_MaxAirPresure)
         {
             m_maxAirPresure = i_MaxAirPresure;
+            m_currentAirPresure = 0;
         }
 
         public bool InflateTire(float i_airToFile) 

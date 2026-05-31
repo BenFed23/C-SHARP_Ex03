@@ -16,10 +16,17 @@ namespace Ex03.GarageLogic
             m_OwnerPhone = i_OwnerPhone;
             m_VehicleStatus = eGarageStatus.InRepair;
         }
-
-        public void SetVehicleStatus(eGarageStatus i_NewVehicleStatus)
+        public eGarageStatus GarageStatus
         {
-            m_VehicleStatus = i_NewVehicleStatus;
+            get
+            {
+                return m_VehicleStatus; 
+            }
+            set
+            {
+                m_VehicleStatus = value;
+            }
         }
+        
     }
 }
