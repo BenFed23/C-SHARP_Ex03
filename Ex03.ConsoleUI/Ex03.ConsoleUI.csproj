@@ -42,7 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="eMenuOptions.cs" />
-    <Compile Include="GarageUI.cs" />
     <Compile Include="GarageUserInterface.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>

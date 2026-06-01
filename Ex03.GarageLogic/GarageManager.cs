@@ -28,21 +28,7 @@ namespace Ex03.GarageLogic
             m_VehiclesInGarage.Add(i_LicensePlateNumber, newVehicleInGarage);
         }
 
-        public List<string> GetVehicleParameters(string i_VehicleType)
-        {
-            Vehicle currentVehicle = VehicleCreator.CreateVehicle(i_VehicleType, null, null);
-            Type vehicleType = currentVehicle.GetType();
-
-            if (vehicleType.IsSubclassOf(typeof(Vehicle)))
-            {
-                //get parameters from user (after knowing which parameters)
-            }
-            else
-            {
-                throw new ArgumentException("You entered an invalid vehicle type");
-            }
-        }
-
+      
         public void ChangeStateOfGarageVehicle(string i_LicensePlateNumber, eGarageStatus i_NewGarageState)
         {
             GarageVehicle currentGarageVehicle = getVehicleByLicensePlateNumber(i_LicensePlateNumber);
@@ -62,6 +48,18 @@ namespace Ex03.GarageLogic
             Vehicle currentVehicle = currentGarageVehicle.GetVehicle();
             currentVehicle.Charge(i_AmountOfMinutesToAdd);
         }
+        public void FillAirInVehicleTyresToMax(string i_LicensePlateNumber)
+        {
+            Tyre [] currentVehicleTyres = m_VehiclesInGarage[i_LicensePlateNumber].GetVehicle().GetTyresColaction();
+            
+            foreach ( Tyre tyre in currentVehicleTyres ) 
+            {
+                tyre.InflateTire(tyre.MaxAirPressure - tyre.CurrentAirPressure);
+            }
+
+           
+        }
+
 
         private GarageVehicle getVehicleByLicensePlateNumber(string i_LicensePlateNumber)
         {
