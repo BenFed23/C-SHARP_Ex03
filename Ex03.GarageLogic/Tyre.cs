@@ -5,9 +5,9 @@ namespace Ex03.GarageLogic
 {
     public class Tyre
     {
-        string m_ManufacturerName;
-        float m_CurrentAirPresure;
-        float m_MaxAirPresure;
+        private string m_ManufacturerName;
+        private float m_CurrentAirPresure;
+        private float m_MaxAirPresure;
 
         public Tyre(float i_MaxAirPresure)
         {
@@ -41,6 +41,7 @@ namespace Ex03.GarageLogic
                 m_MaxAirPresure = value;
             }
         }
+
         public float CurrentAirPressure
         {
             get
@@ -52,5 +53,18 @@ namespace Ex03.GarageLogic
                 m_CurrentAirPresure = value;
             }
         }
+
+        public string ManufacturerName
+        {
+            get
+            {
+                return m_ManufacturerName;
+            }
+            set
+            {
+                m_ManufacturerName = value;
+            }
+        }
+
     }
 }
