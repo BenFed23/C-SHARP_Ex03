@@ -48,6 +48,35 @@ namespace Ex03.GarageLogic
             }
         }
 
+        public virtual List<string> GetBaseVehicleParameters()
+        {
+            List<string> baseParameters = new List<string>();
+
+            baseParameters.Add("Model name");
+            baseParameters.Add("Tyre's manufacturer name");
+            baseParameters.Add("Current air pressure for the tyres");
+
+            return baseParameters;
+        }
+
+        public virtual void SetBaseVehicleParameters(List<string> i_BaseParameters)
+        {
+            string modelName = i_BaseParameters[0];
+            string manufacturer = i_BaseParameters[1];
+
+            if (!float.TryParse(i_BaseParameters[2], out float airPressure))
+            {
+                throw new FormatException("Air pressure must be a valid number.");
+            }
+
+            m_modelName = modelName;
+            foreach (Tyre tyre in m_tyresCollection)
+            {
+                tyre.ManufacturerName = manufacturer;
+                tyre.CurrentAirPressure = airPressure;
+            }
+        }
+
         public abstract List<string> GetSpecialPrameters();
         public abstract void SetSpecialParameters(List<string> i_Parameters);
 

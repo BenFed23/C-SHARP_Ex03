@@ -193,10 +193,12 @@ Enter your choice: ";
         private void getVehicleDataFromUser(string i_LicensePlateNumber)
         {
             string vehicleType = getValidatedVehicleType();
-
-            Console.WriteLine("Please enter the vehicle's model name:");
-            string modelName = Console.ReadLine();
-            Vehicle newVehicle = getVehicleWithSpecialParams(vehicleType, i_LicensePlateNumber, modelName);
+            Vehicle newVehicle = VehicleCreator.CreateVehicle(vehicleType, i_LicensePlateNumber, string.Empty);
+            List<string> baseParameters = newVehicle.GetBaseVehicleParameters();
+            List<string> baseUserAnswers = getVehicleParametersFromUser(baseParameters);
+            newVehicle.SetBaseVehicleParameters(baseUserAnswers);
+            List<string> specialParameters = newVehicle.GetSpecialPrameters(); 
+            List<string> specialUserAnswers = getVehicleParametersFromUser(specialParameters);
             getOwnerDetails(out string ownerName, out string ownerPhone);
             m_GarageManager.AddVehicleToGarage(newVehicle, ownerName, ownerPhone);
             Console.WriteLine("\nVehicle added to garage successfully!");
@@ -214,21 +216,17 @@ Enter your choice: ";
             return userVehicleType;
         }
 
-        private Vehicle getVehicleWithSpecialParams(string i_Type, string i_License, string i_Model)
+        private List<string> getVehicleParametersFromUser(List<string> i_Questions)
         {
-            Vehicle newVehicle = VehicleCreator.CreateVehicle(i_Type, i_License, i_Model);
-            List<string> parametersToFill = newVehicle.GetSpecialPrameters();
             List<string> userAnswers = new List<string>();
 
-            foreach (string paramName in parametersToFill)
+            foreach (string question in i_Questions)
             {
-                Console.WriteLine($"Please enter {paramName}:");
+                Console.WriteLine($"Please enter {question}:");
                 userAnswers.Add(Console.ReadLine());
             }
 
-            newVehicle.SetSpecialParameters(userAnswers);
-
-            return newVehicle;
+            return userAnswers;
         }
 
         private void getOwnerDetails(out string o_OwnerName, out string o_OwnerPhone)
