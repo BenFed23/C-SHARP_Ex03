@@ -13,5 +13,9 @@ namespace Ex03.GarageLogic
         {
             this.AddEnergy(i_HoursToAdd);
         }
+        public override string ToString()
+        {
+            return "Electricity" + m_CurrentEnergyAmount.ToString() + " " + m_MaxEnergyAmount.ToString();
+        }
     }
 }

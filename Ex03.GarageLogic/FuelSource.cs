@@ -51,6 +51,10 @@ namespace Ex03.GarageLogic
                 throw new ArgumentException("Wrong fuel type");
             }
         }
+        public override string ToString()
+        {
+            return m_fuelType.ToString() + " " + m_CurrentEnergyAmount.ToString() + m_MaxEnergyAmount.ToString() ;
+        }
 
     }
 }

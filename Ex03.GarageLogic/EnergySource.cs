@@ -14,7 +14,28 @@ namespace Ex03.GarageLogic
             m_MaxEnergyAmount = i_MaxEnergyAmount;
             m_CurrentEnergyAmount = 0;
         }
-
+        public float MaxFuelCapacity
+        {
+            get
+            {
+                return m_MaxEnergyAmount;
+            }
+            set
+            {
+                m_MaxEnergyAmount = value;
+            }
+        }
+        public float FuelAmount
+        {
+            get
+            {
+                return m_CurrentEnergyAmount;
+            }
+            set
+            {
+                m_CurrentEnergyAmount = value;
+            }
+        }
         protected void  AddEnergy (float i_EnergyAmountToAdd)
         {
             if(i_EnergyAmountToAdd < 0)
@@ -30,5 +51,6 @@ namespace Ex03.GarageLogic
 
             m_CurrentEnergyAmount += i_EnergyAmountToAdd;
         }
+        public abstract override string ToString();
     }
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Runtime.Remoting.Messaging;
 
 
 namespace Ex03.GarageLogic
@@ -17,6 +19,17 @@ namespace Ex03.GarageLogic
         public override void Refuel(float i_AmountOfFuelToAdd, eFuelType i_FuelType)
         {
             m_FuelSource.RefuelVehicle(i_AmountOfFuelToAdd, i_FuelType);
+        }
+        public override List<string> GetSpecialPrameters()
+        {
+            return null;
+        }
+        public override string ToString()
+        {
+            string vehicleDetails = base.ToString();
+            vehicleDetails += m_CargoVolume + " " + m_HasRefrigeratedCargo + " " + m_FuelSource.ToString();
+
+            return vehicleDetails;
         }
     }
 }

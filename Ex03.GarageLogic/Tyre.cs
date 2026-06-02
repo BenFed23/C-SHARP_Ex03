@@ -52,5 +52,9 @@ namespace Ex03.GarageLogic
                 m_currentAirPresure = value;
             }
         }
+        public override string ToString()
+        {
+            return m_menafactureName + " " + m_currentAirPresure;
+        }
     }
 }
