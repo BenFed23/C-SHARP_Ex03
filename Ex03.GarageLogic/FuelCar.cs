@@ -19,7 +19,34 @@ namespace Ex03.GarageLogic
         {
 
             m_FuelSource.RefuelVehicle(i_AmountOfFuelToAdd, i_FuelType);
-            m_energyPercentages = (m_FuelSource.FuelAmount/m_FuelSource.MaxFuelCapacity)*100; 
+            m_energyPercentages = (m_FuelSource.CurrentAmount/m_FuelSource.MaxCapacity)*100; 
+        }
+
+        public override List<string> GetSpecialPrameters()
+        {
+            List<string> specialParameters = GetCarBaseParameters();
+
+            specialParameters.Add("float currentFuelAmountInLiters");
+
+            return specialParameters;
+        }
+
+        public override void SetSpecialParameters(List<string> i_SpecialParameters)
+        {
+            SetCarBaseParameters(i_SpecialParameters);
+            if (!float.TryParse(i_SpecialParameters[2], out float currentFuelAmount))
+            {
+                throw new FormatException("Invalid fuel amount format. Please enter a number.");
+            }
+
+            if (currentFuelAmount > m_FuelSource.MaxCapacity)
+            {
+                throw new ValueRangeException(0, m_FuelSource.MaxCapacity, "Fuel amount exceeds tank capacity");
+            }
+
+            m_FuelSource.CurrentAmount = currentFuelAmount;
+            m_energyPercentages = m_FuelSource.EnergyPercentage;
+
         }
         public override string ToString()
         {

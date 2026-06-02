@@ -21,12 +21,12 @@ namespace Ex03.GarageLogic
             return vehicleIsInGarage;
         }
 
-        public void AddVehicle(string i_VehicleType, string i_LicensePlateNumber, string i_ModelName, string i_OwnerName, string i_OwnerPhone)
+        public void AddVehicleToGarage(Vehicle i_Vehicle, string i_OwnerName, string i_OwnerPhone)
         {
-            Vehicle newVehicle = VehicleCreator.CreateVehicle(i_VehicleType, i_LicensePlateNumber, i_ModelName);
-            GarageVehicle newVehicleInGarage = new GarageVehicle(newVehicle, i_OwnerName, i_OwnerPhone);
-            m_VehiclesInGarage.Add(i_LicensePlateNumber, newVehicleInGarage);
+            GarageVehicle newVehicleInGarage = new GarageVehicle(i_Vehicle, i_OwnerName, i_OwnerPhone);
+            m_VehiclesInGarage.Add(i_Vehicle.getVehicleLicensePlateNumber(), newVehicleInGarage);
         }
+
 
         public void ChangeStateOfGarageVehicle(string i_LicensePlateNumber, eGarageStatus i_NewGarageState)
         {
@@ -58,6 +58,8 @@ namespace Ex03.GarageLogic
 
            
         }
+
+
         private GarageVehicle getVehicleByLicensePlateNumber(string i_LicensePlateNumber)
         {
             if(!m_VehiclesInGarage.TryGetValue(i_LicensePlateNumber, out GarageVehicle desiredGarageVehicle))
@@ -67,6 +69,7 @@ namespace Ex03.GarageLogic
 
             return desiredGarageVehicle;
         }
+
         public string[] loadVehicleDataBase()
         {
             try

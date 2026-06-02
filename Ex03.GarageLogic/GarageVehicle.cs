@@ -26,6 +26,11 @@ namespace Ex03.GarageLogic
         {
            return r_Vehicle;
         }
+
+        public eGarageStatus GetVehicleStatus()
+        {
+            return m_VehicleStatus;
+        }
         public override string ToString()
         {
             return r_Vehicle.ToString() + " " +  m_OwnerName + " " + m_VehicleStatus.ToString();

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex03.ConsoleUI
 {
@@ -10,7 +6,8 @@ namespace Ex03.ConsoleUI
     {
         public static void Main() 
         {
-            GarageUserInterface userInterface = new GarageUserInterface();
+            Ex03.GarageLogic.GarageManager garageManager = new Ex03.GarageLogic.GarageManager();
+            GarageUserInterface userInterface = new GarageUserInterface(garageManager);
             userInterface.DisplayGarageMenu();
         }
     }

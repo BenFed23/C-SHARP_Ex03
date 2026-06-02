@@ -17,20 +17,26 @@ namespace Ex03.GarageLogic
         {
             m_ElectricSource.chargeElectricVehicle(i_AmountOfMinutesToCharge / 60f);
         }
+
         public override List<string> GetSpecialPrameters() 
         {
-            List<string> specialParameters = new List<string>();
-            specialParameters.Add("eLiecenseType liecenseType");
-            specialParameters.Add("float volum");
+            List<string> specialParameters = GetMotorcycleBaseParameters();
+
+            specialParameters.Add("float currentBatteryTimeInHours");
 
             return specialParameters;
         }
-        public override string ToString()
-        {
-           string  details = base.ToString();
-           details += m_ElectricSource.ToString();
 
-            return details;
+        public override void SetSpecialParameters(List<string> i_SpecialParameters)
+        {
+            SetMotorcycleBaseParameters(i_SpecialParameters);
+            if (!float.TryParse(i_SpecialParameters[2], out float currentBattery))
+            {
+                throw new FormatException("Invalid battery time. Please enter a number.");
+            }
+
+            m_ElectricSource.CurrentAmount = currentBattery;
+            m_energyPercentages = m_ElectricSource.EnergyPercentage;
         }
     }
 }
