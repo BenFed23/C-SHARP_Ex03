@@ -68,10 +68,7 @@ namespace Ex03.GarageLogic
             m_FuelSource.CurrentAmount = currentFuelAmount;
             m_energyPercentages = m_FuelSource.EnergyPercentage;
         }
-        public override List<string> GetSpecialPrameters()
-        {
-            return null;
-        }
+       
         public override string ToString()
         {
             string vehicleDetails = base.ToString();

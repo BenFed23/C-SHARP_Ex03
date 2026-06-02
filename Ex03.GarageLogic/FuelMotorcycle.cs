@@ -41,5 +41,11 @@ namespace Ex03.GarageLogic
             m_FuelSource.CurrentAmount = currentFuelAmount;
             m_energyPercentages = m_FuelSource.EnergyPercentage;
         }
+        public override string ToString()
+        {
+            string fuelMotorcycleDetails = base.ToString() + " " + m_FuelSource.ToString();
+
+            return fuelMotorcycleDetails;
+        }
     }
 }

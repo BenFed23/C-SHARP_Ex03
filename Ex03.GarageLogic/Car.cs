@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Ex03.GarageLogic
 {
     public abstract class Car : Vehicle
     {
-        protected eCarColor m_carColor;
-        protected eNumberOfDoors m_numOfDoors;
+        private eCarColor m_carColor;
+        private eNumberOfDoors m_numOfDoors;
         private const int k_AmountOfWheels = 5;
         private const int k_MaxAirPressure = 31;
 
@@ -47,6 +48,13 @@ namespace Ex03.GarageLogic
 
             m_carColor = carColor;
             m_numOfDoors = numberOfDoors;
+        }
+        public override string ToString()
+        {
+            string carDetails =  base.ToString();
+            carDetails += m_carColor.ToString() + " " + m_numOfDoors.ToString();
+
+            return carDetails;
         }
     }
 

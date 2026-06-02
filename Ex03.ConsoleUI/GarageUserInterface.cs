@@ -292,7 +292,7 @@ namespace Ex03.ConsoleUI
             Dictionary<string, GarageVehicle> garageDictionary = m_GarageManager.GetDictionary();
             foreach (KeyValuePair<string, GarageVehicle> car in garageDictionary)
             {
-                if (car.Value.GarageStatus == i_carStatus)
+                if (car.Value.GetVehicleStatus() == i_carStatus)
                 {
                     carPlatesWithGivenState.Add(car.Key);
                 }

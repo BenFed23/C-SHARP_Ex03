@@ -50,9 +50,10 @@ namespace Ex03.GarageLogic
         }
         public override string ToString()
         {
-            string details = base.ToString();
-            details += m_FuelSource.ToString();
-            return details;
+            string fueldetails = base.ToString();
+            fueldetails += m_FuelSource.ToString();
+
+            return fueldetails;
         }
       
 

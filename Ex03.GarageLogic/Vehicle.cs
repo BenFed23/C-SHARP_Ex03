@@ -22,9 +22,6 @@ namespace Ex03.GarageLogic
         {
             return m_tyresCollection;
         }
-
-      
-
         public string getVehicleLicensePlateNumber()
         {
             return m_licensePlateNumber;
@@ -80,6 +77,12 @@ namespace Ex03.GarageLogic
 
         public abstract List<string> GetSpecialPrameters();
         public abstract void SetSpecialParameters(List<string> i_Parameters);
+        public override string ToString()
+        {
+            string vehileDetails = m_modelName + m_licensePlateNumber + m_energyPercentages;
+
+            return vehileDetails;
+        }
 
     }
 }
