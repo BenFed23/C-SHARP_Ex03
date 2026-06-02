@@ -47,6 +47,7 @@ namespace Ex03.GarageLogic
             Vehicle currentVehicle = currentGarageVehicle.GetVehicle();
             currentVehicle.Charge(i_AmountOfMinutesToAdd);
         }
+
         public void FillAirInVehicleTyresToMax(string i_LicensePlateNumber)
         {
             Tyre [] currentVehicleTyres = m_VehiclesInGarage[i_LicensePlateNumber].GetVehicle().GetTyresColaction();
@@ -55,10 +56,7 @@ namespace Ex03.GarageLogic
             {
                 tyre.InflateTire(tyre.MaxAirPressure - tyre.CurrentAirPressure);
             }
-
-           
         }
-
 
         private GarageVehicle getVehicleByLicensePlateNumber(string i_LicensePlateNumber)
         {
@@ -87,11 +85,10 @@ namespace Ex03.GarageLogic
                 Console.WriteLine("An Eror Occurred while opening the file");
                 return new string[0];
             }
-           
         }
+
         public Dictionary<string, GarageVehicle>  GetDictionary() 
         {
-
             return m_VehiclesInGarage;
         }
      
