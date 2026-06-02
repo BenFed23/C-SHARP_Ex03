@@ -110,7 +110,8 @@ Enter your choice: ";
         {
             Console.WriteLine("Please enter license plate number:");
             o_VehicleLicenseNumber = Console.ReadLine();
-            Console.WriteLine("Please enter new vehicle state:");
+            string stateOptions = string.Join(", ", Enum.GetNames(typeof(eGarageStatus)));
+            Console.WriteLine("Please enter new vehicle state ({0}):", stateOptions);
             o_NewVehicleState = Console.ReadLine();
         }
 
@@ -155,9 +156,9 @@ Enter your choice: ";
         {
             Console.WriteLine("Please enter license plate number:");
             o_VehicleLicenseNumber = Console.ReadLine();
-            Console.WriteLine("Please enter fuel type:");
+            string fuelOptions = string.Join(", ", Enum.GetNames(typeof(eFuelType)));
+            Console.WriteLine("Please enter fuel type ({0}):", fuelOptions);
             o_FuelType = Console.ReadLine();
-            // add validate fuel type method
             Console.WriteLine("Please enter amount of fuel to add:");
             o_AmountOfFuelToAdd = Console.ReadLine();
         }
@@ -203,7 +204,7 @@ Enter your choice: ";
 
         private string getValidatedVehicleType()
         {
-            Console.WriteLine("Enter vehicle type:");
+            Console.WriteLine("Enter vehicle type ({0}):", string.Join(", ", VehicleCreator.SupportedTypes));
             string userVehicleType = Console.ReadLine();
             if (!VehicleCreator.SupportedTypes.Contains(userVehicleType))
             {

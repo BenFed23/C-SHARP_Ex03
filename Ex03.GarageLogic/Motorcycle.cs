@@ -17,5 +17,33 @@ namespace Ex03.GarageLogic
                 m_tyresCollection[i] = new Tyre(k_MaxAirPressure);
             } 
         }
+
+        protected List<string> GetMotorcycleBaseParameters()
+        {
+            List<string> baseMotorcycleParameters = new List<string>();
+            string licenseOptions = string.Join(", ", Enum.GetNames(typeof(eLicenseType)));
+
+            parameters.Add($"license type ({licenseOptions})");
+            parameters.Add("engine volume (int)");
+
+            return parameters;
+        }
+
+        protected void SetMotorcycleBaseParameters(List<string> i_BaseMotorcycleParameters)
+        {
+            if (!Enum.TryParse(i_BaseMotorcycleParameters[0], out eLicenseType licenseType))
+            {
+                throw new FormatException("Invalid license type");
+            }
+
+            if (!int.TryParse(i_BaseMotorcycleParameters[1], out int engineVolume))
+            {
+                throw new FormatException("Invalid engine volume");
+            }
+
+            m_LicenseType = licenseType;
+            m_EngineVolume = engineVolume;
+        }
+
     }
 }

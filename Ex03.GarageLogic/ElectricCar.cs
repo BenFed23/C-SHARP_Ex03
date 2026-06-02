@@ -19,33 +19,21 @@ namespace Ex03.GarageLogic
 
         public override List<string> GetSpecialPrameters() 
         {
-            List<string> specialParametes = new List<string>();
-            specialParametes.Add("eCarColor carColor");
-            specialParametes.Add("enumOfDors numOfDors");
+            List<string> specialParametes = GetCarBaseParameters();
+     
             specialParametes.Add("float currentBatteryTimeInHours");
 
             return specialParametes;
         }
 
-        public override void SetSpecialParameters(List<string> i_Parameters)
+        public override void SetSpecialParameters(List<string> i_SpecialParameters)
         {
-            if (!Enum.TryParse(i_Parameters[0], out eCarColor carColor))
-            {
-                throw new FormatException("Invalid car color");
-            }
-
-            if (!Enum.TryParse(i_Parameters[1], out eNumberOfDoors numberOfDoors))
-            {
-                throw new FormatException("Invalid number of doors");
-            }
-
+            SetCarBaseParameters(i_SpecialParameters);
             if (!float.TryParse(i_Parameters[2], out float currentBatteryTime))
             {
                 throw new FormatException("Invalid battery time format. Please enter a number.");
             }
-
-            m_carColor = carColor;
-            m_numOfDoors = numberOfDoors;
+           
             m_ElectricSource.CurrentAmount = currentBatteryTime;
         }
     }
