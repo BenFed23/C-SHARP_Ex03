@@ -46,18 +46,18 @@ namespace Ex03.ConsoleUI
         private void printMenuOptions()
         {
             string menuTemplate = @"*** Welcome to the Garage Management System ***
-Please choose one of the following options:
-1. Load vehicle data from file
-2. Add a new vehicle to the garage
-3. Display license numbers of vehicles in the garage
-4. Change a vehicle's status in garage
-5. Inflate tires to maximum air pressure
-6. Refuel a fuel-powered vehicle
-7. Charge an electric vehicle
-8. Display full vehicle information
-9. Exit
+        Please choose one of the following options:
+        1. Load vehicle data from file
+        2. Add a new vehicle to the garage
+        3. Display license numbers of vehicles in the garage
+        4. Change a vehicle's status in garage
+        5. Inflate tires to maximum air pressure
+        6. Refuel a fuel-powered vehicle
+        7. Charge an electric vehicle
+        8. Display full vehicle information
+        9. Exit
 
-Enter your choice: ";
+        Enter your choice: ";
 
             Console.Write(menuTemplate);
         }
@@ -238,13 +238,7 @@ Enter your choice: ";
             o_OwnerPhone = Console.ReadLine();
         }
 
-        public List<string> GetVehicleParameters(string i_VehicleType)
-        {
-            Vehicle currentVehicle = VehicleCreator.CreateVehicle(i_VehicleType, string.Empty, string.Empty);
-            
-            return currentVehicle.GetSpecialPrameters();
-        }
-
+       
         public void ShowPlateList()
         {
             Dictionary<string, GarageVehicle> garageDictionary = m_GarageManager.GetDictionary();
@@ -291,18 +285,11 @@ Enter your choice: ";
             }
         }
 
-        public void ShowPlateList()
-        {
-            Dictionary<string, GarageVehicle> garageDictionary = m_garageManager.GetDictionary();
-            foreach (string plate in garageDictionary.Keys)
-            {
-                Console.WriteLine(plate);
-            }
-        }
+       
         public void ShowPlateLisAcourdingToState(eGarageStatus i_carStatus)
         {
             List<string> carPlatesWithGivenState = new List<string>();
-            Dictionary<string, GarageVehicle> garageDictionary = m_garageManager.GetDictionary();
+            Dictionary<string, GarageVehicle> garageDictionary = m_GarageManager.GetDictionary();
             foreach (KeyValuePair<string, GarageVehicle> car in garageDictionary)
             {
                 if (car.Value.GarageStatus == i_carStatus)
@@ -312,16 +299,10 @@ Enter your choice: ";
             }
             PrintGivenList(carPlatesWithGivenState);
         }
-        public void PrintGivenList(List<string> i_givenList)
-        {
-            foreach (string value in i_givenList)
-            {
-                Console.WriteLine(value);
-            }
-        }
+
         public void ShowVehiceleDetails(string i_licensePlate)
         {
-            Console.WriteLine(m_garageManager.GetDictionary()[i_licensePlate].ToString());
+            Console.WriteLine(m_GarageManager.GetDictionary()[i_licensePlate].ToString());
         }
     }
 }

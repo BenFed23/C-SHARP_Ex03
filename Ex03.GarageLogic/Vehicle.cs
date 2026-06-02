@@ -23,10 +23,7 @@ namespace Ex03.GarageLogic
             return m_tyresCollection;
         }
 
-        public Tyre[] GetTyresColaction()
-        {
-            return m_tyresCollection;
-        }
+      
 
         public string getVehicleLicensePlateNumber()
         {

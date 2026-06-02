@@ -54,10 +54,7 @@ namespace Ex03.GarageLogic
             details += m_FuelSource.ToString();
             return details;
         }
-        public override List<string> GetSpecialPrameters() 
-        {
-            return new List<string>();
-        }
+      
 
 
 
