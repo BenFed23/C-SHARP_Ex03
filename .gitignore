@@ -16,3 +16,6 @@ DEBUG/
 RELEASE/
 /Ex03.ConsoleUI/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 /.gitignore
+obj/ 
+*.cache 
+*.user 
