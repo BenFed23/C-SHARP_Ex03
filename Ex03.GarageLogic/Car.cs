@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections.Generic;
 
 namespace Ex03.GarageLogic
 {
@@ -17,7 +17,7 @@ namespace Ex03.GarageLogic
             {
                 m_tyresCollection[i] = new Tyre(k_MaxAirPressure);
             }
-            m_numOfDoors = eNumberOfDoors.Option4;
+            m_numOfDoors = eNumberOfDoors.FiveDoors;
             m_carColor = eCarColor.Red;
         }
 
@@ -27,20 +27,20 @@ namespace Ex03.GarageLogic
             string colorOptions = string.Join(", ", Enum.GetNames(typeof(eCarColor)));
             string numberOfDoorOptions = string.Join(", ", Enum.GetNames(typeof(eNumberOfDoors)));
 
-            parameters.Add($"car color ({colorOptions})");
-            parameters.Add($"number of doors ({doorOptions})");
+            baseCarParameters.Add($"car color ({colorOptions})");
+            baseCarParameters.Add($"number of doors ({numberOfDoorOptions})");
 
-            return parameters;
+            return baseCarParameters;
         }
 
-        protected void SetCarBaseParameters(List<string> i_Parameters)
+        protected void SetCarBaseParameters(List<string> i_baseCarParameters)
         {
-            if (!Enum.TryParse(i_Parameters[0], out eCarColor carColor))
+            if (!Enum.TryParse(i_baseCarParameters[0], out eCarColor carColor))
             {
                 throw new FormatException("Invalid car color");
             }
 
-            if (!Enum.TryParse(i_Parameters[1], out eNumberOfDoors numberOfDoors))
+            if (!Enum.TryParse(i_baseCarParameters[1], out eNumberOfDoors numberOfDoors))
             {
                 throw new FormatException("Invalid number of doors");
             }

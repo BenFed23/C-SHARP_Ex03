@@ -30,7 +30,7 @@ namespace Ex03.GarageLogic
         public override void SetSpecialParameters(List<string> i_SpecialParameters)
         {
             SetMotorcycleBaseParameters(i_SpecialParameters);
-            if (!float.TryParse(i_Parameters[2], out float currentBattery))
+            if (!float.TryParse(i_SpecialParameters[2], out float currentBattery))
             {
                 throw new FormatException("Invalid battery time. Please enter a number.");
             }

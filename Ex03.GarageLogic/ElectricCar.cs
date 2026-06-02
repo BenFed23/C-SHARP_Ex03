@@ -29,7 +29,7 @@ namespace Ex03.GarageLogic
         public override void SetSpecialParameters(List<string> i_SpecialParameters)
         {
             SetCarBaseParameters(i_SpecialParameters);
-            if (!float.TryParse(i_Parameters[2], out float currentBatteryTime))
+            if (!float.TryParse(i_SpecialParameters[2], out float currentBatteryTime))
             {
                 throw new FormatException("Invalid battery time format. Please enter a number.");
             }

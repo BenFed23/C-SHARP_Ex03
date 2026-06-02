@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Ex03.GarageLogic
 {
@@ -23,10 +24,10 @@ namespace Ex03.GarageLogic
             List<string> baseMotorcycleParameters = new List<string>();
             string licenseOptions = string.Join(", ", Enum.GetNames(typeof(eLicenseType)));
 
-            parameters.Add($"license type ({licenseOptions})");
-            parameters.Add("engine volume (int)");
+            baseMotorcycleParameters.Add($"license type ({licenseOptions})");
+            baseMotorcycleParameters.Add("engine volume (int)");
 
-            return parameters;
+            return baseMotorcycleParameters;
         }
 
         protected void SetMotorcycleBaseParameters(List<string> i_BaseMotorcycleParameters)

@@ -34,7 +34,7 @@ namespace Ex03.GarageLogic
         public override void SetSpecialParameters(List<string> i_SpecialParameters)
         {
             SetCarBaseParameters(i_SpecialParameters);
-            if (!float.TryParse(i_Parameters[2], out float currentFuelAmount))
+            if (!float.TryParse(i_SpecialParameters[2], out float currentFuelAmount))
             {
                 throw new FormatException("Invalid fuel amount format. Please enter a number.");
             }
