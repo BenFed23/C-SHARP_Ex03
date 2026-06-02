@@ -6,10 +6,11 @@ namespace Ex03.GarageLogic
 {
     public abstract class Vehicle
     {
-       private string m_modelName;
-       private string m_licensePlateNumber;
-       protected float m_energyPercentages;
-       protected Tyre[] m_tyresCollection; 
+        private string m_modelName;
+        private string m_licensePlateNumber;
+        protected float m_energyPercentages;
+        protected Tyre[] m_tyresCollection; 
+
         public Vehicle(string i_LicensePlateNumber, string i_ModelName)
         {
             m_modelName = i_ModelName;
@@ -17,9 +18,15 @@ namespace Ex03.GarageLogic
             m_energyPercentages = 100;
             m_tyresCollection = null;
         }
+
         public Tyre[] GetTyresColaction()
         {
             return m_tyresCollection;
+        }
+
+        public string getVehicleLicensePlateNumber()
+        {
+            return m_licensePlateNumber;
         }
 
         public virtual void Refuel(float i_AmountOfFuelToAdd, eFuelType i_FuelType)
@@ -31,7 +38,9 @@ namespace Ex03.GarageLogic
         {
             throw new ArgumentException("This vehicle isn't run by Electricity");
         }
+
         public abstract List<string> GetSpecialPrameters();
-       
+        public abstract void SetSpecialParameters(List<string> i_Parameters);
+
     }
 }

@@ -7,18 +7,18 @@ namespace Ex03.ConsoleUI
 
     public class GarageUserInterface
     {
-       
-        private GarageManager m_garageManager;
+
+        private GarageManager m_GarageManager;
 
         public GarageUserInterface(GarageManager i_garageManager)
         {
-            m_garageManager = i_garageManager;
+            m_GarageManager = i_garageManager;
         }
         public void DisplayGarageMenu()
         {
             bool isExitPressed = false;
 
-            while(!isExitPressed)
+            while (!isExitPressed)
             {
                 printMenuOptions();
                 string userChoiceInput = Console.ReadLine();
@@ -46,42 +46,30 @@ namespace Ex03.ConsoleUI
         private void printMenuOptions()
         {
             string menuTemplate = @"*** Welcome to the Garage Management System ***
-            Please choose one of the following options:
-            {0}. Load vehicle data from file
-            {1}. Add a new vehicle to the garage
-            {2}. Display license numbers of vehicles in the garage
-            {3}. Change a vehicle's status in garage
-            {4}. Inflate tires to maximum air pressure
-            {5}. Refuel a fuel-powered vehicle
-            {6}. Charge an electric vehicle
-            {7}. Display full vehicle information
-            {8}. Exit
+Please choose one of the following options:
+1. Load vehicle data from file
+2. Add a new vehicle to the garage
+3. Display license numbers of vehicles in the garage
+4. Change a vehicle's status in garage
+5. Inflate tires to maximum air pressure
+6. Refuel a fuel-powered vehicle
+7. Charge an electric vehicle
+8. Display full vehicle information
+9. Exit
 
-            Enter your choice: ";
+Enter your choice: ";
 
-            string formattedMenu = string.Format(
-                menuTemplate,
-                (int)eMenuOptions.LoadDataFromDBFile,
-                (int)eMenuOptions.AddNewVehicleToGarage, 
-                (int)eMenuOptions.ShowListOfLicensePlateNumbers,
-                (int)eMenuOptions.ChangeVehicleStateInGarage,
-                (int)eMenuOptions.InflateTiresToMaxAirPressure,
-                (int)eMenuOptions.RefuelVehicle,
-                (int)eMenuOptions.ChargeVehicle,
-                (int)eMenuOptions.ShowFullVehicleDetails,
-                (int)eMenuOptions.Exit
-            );
-
-            Console.Write(formattedMenu);
+            Console.Write(menuTemplate);
         }
 
         private void executeUserChoice(eMenuOptions i_UserMenuChoice, ref bool io_IsExitPressed)
         {
-            switch(i_UserMenuChoice)
+            switch (i_UserMenuChoice)
             {
                 case eMenuOptions.LoadDataFromDBFile:
                     break;
                 case eMenuOptions.AddNewVehicleToGarage:
+                    executeAddNewVehicle();
                     break;
                 case eMenuOptions.ShowListOfLicensePlateNumbers:
                     break;
@@ -106,9 +94,16 @@ namespace Ex03.ConsoleUI
 
         private void executeChangeVehicleState()
         {
-            getChangeStateValuesFromUser(out string vehicleLicenseNumber, out string newVehicleState);
-            Enum.TryParse(newVehicleState, out eGarageStatus newGarageVehicleStatus);
-            m_garageManager.ChangeStateOfGarageVehicle(vehicleLicenseNumber, newGarageVehicleStatus);
+            try
+            {
+                getChangeStateValuesFromUser(out string vehicleLicenseNumber, out string newVehicleState);
+                Enum.TryParse(newVehicleState, out eGarageStatus newGarageVehicleStatus);
+                m_GarageManager.ChangeStateOfGarageVehicle(vehicleLicenseNumber, newGarageVehicleStatus);
+            }
+            catch (ArgumentException argumentException)
+            {
+                Console.WriteLine($"Error: {argumentException.Message}");
+            }
         }
 
         private void getChangeStateValuesFromUser(out string o_VehicleLicenseNumber, out string o_NewVehicleState)
@@ -121,17 +116,31 @@ namespace Ex03.ConsoleUI
 
         private void executeRefuelOption()
         {
-            getRefuelValuesFromUser(out string vehicleLicenseNumber, out string stringFuelType, out string stringAmountOfFuelToAdd);
-            Enum.TryParse(stringFuelType, out eFuelType fuelType);
-            float.TryParse(stringAmountOfFuelToAdd, out float amountOfFuelToAdd);
-            m_garageManager.RefuelVehicle(vehicleLicenseNumber, fuelType, amountOfFuelToAdd);
+            try
+            {
+                getRefuelValuesFromUser(out string vehicleLicenseNumber, out string stringFuelType, out string stringAmountOfFuelToAdd);
+                Enum.TryParse(stringFuelType, out eFuelType fuelType);
+                float.TryParse(stringAmountOfFuelToAdd, out float amountOfFuelToAdd);
+                m_GarageManager.RefuelVehicle(vehicleLicenseNumber, fuelType, amountOfFuelToAdd);
+            }
+            catch (ArgumentException argumentException)
+            {
+                Console.WriteLine($"Error: {argumentException.Message}");
+            }
         }
 
         private void executeChargeOption()
         {
-            getChargeValuesFromUser(out string vehicleLicenseNumber, out string stringAmountOfMinutesToAdd);
-            float.TryParse(stringAmountOfMinutesToAdd, out float amountOfMinutesToAdd);
-            m_garageManager.ChargeVehicle(vehicleLicenseNumber, amountOfMinutesToAdd);
+            try
+            {
+                getChargeValuesFromUser(out string vehicleLicenseNumber, out string stringAmountOfMinutesToAdd);
+                float.TryParse(stringAmountOfMinutesToAdd, out float amountOfMinutesToAdd);
+                m_GarageManager.ChargeVehicle(vehicleLicenseNumber, amountOfMinutesToAdd);
+            }
+            catch (ArgumentException argumentException)
+            {
+                Console.WriteLine($"Error: {argumentException.Message}");
+            }
         }
 
         private void getChargeValuesFromUser(out string o_VehicleLicenseNumber, out string o_AmountOfMinutesToAdd)
@@ -153,87 +162,113 @@ namespace Ex03.ConsoleUI
             o_AmountOfFuelToAdd = Console.ReadLine();
         }
 
+        private void executeAddNewVehicle()
+        {
+            try
+            {
+                getNewVehicleFromUser();
+            }
+            catch (ArgumentException argumentException)
+            {
+                Console.WriteLine($"Error: {argumentException.Message}");
+            }
+        }
+
         private void getNewVehicleFromUser()
         {
             Console.WriteLine("Please enter the vehicle's license plate number");
             string userLicensePlateNumberInput = Console.ReadLine();
 
-            if(m_garageManager.CheckIfVehicleInGarage(userLicensePlateNumberInput))
+            if (m_GarageManager.CheckIfVehicleInGarage(userLicensePlateNumberInput))
             {
                 Console.WriteLine($"Vehicle with license plate number: {userLicensePlateNumberInput} is already in Garage. Updated status to 'In Repair'.");
             }
             else //second chance?
             {
-                getVehicleDataFromUser();
+                getVehicleDataFromUser(userLicensePlateNumberInput);
             }
         }
 
-        private void getVehicleDataFromUser()
+        private void getVehicleDataFromUser(string i_LicensePlateNumber)
         {
-            Console.WriteLine("Please enter the vehicle's details:");
+            string vehicleType = getValidatedVehicleType();
+
+            Console.WriteLine("Please enter the vehicle's model name:");
+            string modelName = Console.ReadLine();
+            Vehicle newVehicle = getVehicleWithSpecialParams(vehicleType, i_LicensePlateNumber, modelName);
+            getOwnerDetails(out string ownerName, out string ownerPhone);
+            m_GarageManager.AddVehicleToGarage(newVehicle, ownerName, ownerPhone);
+            Console.WriteLine("\nVehicle added to garage successfully!");
+        }
+
+        private string getValidatedVehicleType()
+        {
             Console.WriteLine("Enter vehicle type:");
             string userVehicleType = Console.ReadLine();
-            if(!VehicleCreator.SupportedTypes.Contains(userVehicleType))
+            if (!VehicleCreator.SupportedTypes.Contains(userVehicleType))
             {
-                throw new ArgumentException($"The vehicle type '{userVehicleType}' is not supported");
+                throw new ArgumentException($"The vehicle type '{userVehicleType}' is not supported.");
             }
 
-            getVehicleParamsAccordingToType(userVehicleType);
+            return userVehicleType;
         }
 
-        private Vehicle getVehicleParamsAccordingToType(string i_VehicleType)
+        private Vehicle getVehicleWithSpecialParams(string i_Type, string i_License, string i_Model)
         {
-            List<string> currentVehicleParameters = GetVehicleParameters(i_VehicleType);
+            Vehicle newVehicle = VehicleCreator.CreateVehicle(i_Type, i_License, i_Model);
+            List<string> parametersToFill = newVehicle.GetSpecialPrameters();
+            List<string> userAnswers = new List<string>();
 
-            foreach(string parameter in currentVehicleParameters)
+            foreach (string paramName in parametersToFill)
             {
-                Console.WriteLine($"please enter the vehicle's {parameter}");
-                String assignedParameter = Console.ReadLine();
-                //check if valid
-                //create parameter
-                // else Exception
+                Console.WriteLine($"Please enter {paramName}:");
+                userAnswers.Add(Console.ReadLine());
             }
 
-            //return vehicle 
-            return null;
+            newVehicle.SetSpecialParameters(userAnswers);
+
+            return newVehicle;
+        }
+
+        private void getOwnerDetails(out string o_OwnerName, out string o_OwnerPhone)
+        {
+            Console.WriteLine("Please enter owner's name:");
+            o_OwnerName = Console.ReadLine();
+
+            Console.WriteLine("Please enter owner's phone number:");
+            o_OwnerPhone = Console.ReadLine();
         }
 
         public List<string> GetVehicleParameters(string i_VehicleType)
         {
-            Vehicle currentVehicle = VehicleCreator.CreateVehicle(i_VehicleType, null, null);
-            Type vehicleType = currentVehicle.GetType();
-
-            if (vehicleType.IsSubclassOf(typeof(Vehicle)))
-            {
-                //get parameters from user (after knowing which parameters)
-            }
-            else
-            {
-                throw new ArgumentException("You entered an invalid vehicle type");
-            }
+            Vehicle currentVehicle = VehicleCreator.CreateVehicle(i_VehicleType, string.Empty, string.Empty);
+            
+            return currentVehicle.GetSpecialPrameters();
         }
 
         public void ShowPlateList()
         {
-            Dictionary<string, GarageVehicle> garageDictionary = m_garageManager.GetDictionary();
+            Dictionary<string, GarageVehicle> garageDictionary = m_GarageManager.GetDictionary();
             foreach (string plate in garageDictionary.Keys)
             {
                 Console.WriteLine(plate);
             }
         }
-        public void ShowPlateLisAcourdingToState(eGarageStatus i_carStatus)
+
+        public void ShowPlateLiscenseAccordingToState(eGarageStatus i_carStatus)
         {
             List<string> carPlatesWithGivenState = new List<string>();
-            Dictionary<string, GarageVehicle> garageDictionary = m_garageManager.GetDictionary();
+            Dictionary<string, GarageVehicle> garageDictionary = m_GarageManager.GetDictionary();
             foreach (KeyValuePair<string, GarageVehicle> car in garageDictionary)
             {
-                if (car.Value.GarageStatus == i_carStatus)
+                if (car.Value.GetVehicleStatus() == i_carStatus)
                 {
                     carPlatesWithGivenState.Add(car.Key);
                 }
             }
             PrintGivenList(carPlatesWithGivenState);
         }
+
         public void PrintGivenList(List<string> i_givenList)
         {
             foreach (string value in i_givenList)

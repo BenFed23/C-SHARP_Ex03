@@ -5,8 +5,8 @@ namespace Ex03.GarageLogic
 {
     public abstract class Car : Vehicle
     {
-         eCarColor m_carColor;
-        eNumberOfDoors m_numOfDoors;
+        protected eCarColor m_carColor;
+        protected eNumberOfDoors m_numOfDoors;
         private const int k_AmountOfWheels = 5;
         private const int k_MaxAirPressure = 31;
         public Car(string i_LicensePlateNumber, string i_ModelName) : base( i_LicensePlateNumber,  i_ModelName)
