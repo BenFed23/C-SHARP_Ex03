@@ -26,5 +26,10 @@ namespace Ex03.GarageLogic
         {
            return r_Vehicle;
         }
+
+        public eGarageStatus GetVehicleStatus()
+        {
+            return m_VehicleStatus;
+        }
     }
 }

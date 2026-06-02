@@ -5,26 +5,26 @@ namespace Ex03.GarageLogic
 {
     public class Tyre
     {
-        string m_menafactureName;
-        float m_currentAirPresure;
-        float m_maxAirPresure;
+        private string m_ManufacturerName;
+        private float m_CurrentAirPresure;
+        private float m_MaxAirPresure;
 
         public Tyre(float i_MaxAirPresure)
         {
-            m_maxAirPresure = i_MaxAirPresure;
-            m_currentAirPresure = 0;
+            m_MaxAirPresure = i_MaxAirPresure;
+            m_CurrentAirPresure = 0;
         }
 
         public bool InflateTire(float i_airToFile) 
         {
             bool succes = true;
-            if (m_currentAirPresure + i_airToFile > m_maxAirPresure) 
+            if (m_CurrentAirPresure + i_airToFile > m_MaxAirPresure) 
             {
                 succes = false;
             }
             else 
             {
-                m_currentAirPresure += i_airToFile;
+                m_CurrentAirPresure += i_airToFile;
             }
 
             return succes;
@@ -34,23 +34,37 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return m_maxAirPresure;
+                return m_MaxAirPresure;
             }
             set
             {
-                m_maxAirPresure = value;
+                m_MaxAirPresure = value;
             }
         }
+
         public float CurrentAirPressure
         {
             get
             {
-                return m_currentAirPresure;
+                return m_CurrentAirPresure;
             }
             set
             {
-                m_currentAirPresure = value;
+                m_CurrentAirPresure = value;
             }
         }
+
+        public string ManufacturerName
+        {
+            get
+            {
+                return m_ManufacturerName;
+            }
+            set
+            {
+                m_ManufacturerName = value;
+            }
+        }
+
     }
 }

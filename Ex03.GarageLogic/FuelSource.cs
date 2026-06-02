@@ -9,7 +9,6 @@ namespace Ex03.GarageLogic
  
         public FuelSource(float i_maxcapacity,eFuelType i_fuelType): base(i_maxcapacity)
         {
-           
             m_fuelType = i_fuelType;    
         }
       
@@ -19,8 +18,6 @@ namespace Ex03.GarageLogic
             {
                 return m_fuelType;
             }
-       
-
         }
 
         public void RefuelVehicle(float i_AmountOfFuelToAdd, eFuelType i_FuelType)
