@@ -6,9 +6,10 @@ namespace Ex03.GarageLogic
     public class FuelMotorcycle: Motorcycle
     {
         protected FuelSource m_FuelSource;
+
         public FuelMotorcycle(string i_LicensePlateNumber, string i_ModelName) : base(i_LicensePlateNumber, i_ModelName)
         {
-
+            m_FuelSource = new FuelSource(5.6f, eFuelType.Octan98);
         }
 
         public override void Refuel(float i_AmountOfFuelToAdd, eFuelType i_FuelType)
@@ -39,6 +40,7 @@ namespace Ex03.GarageLogic
             }
 
             m_FuelSource.CurrentAmount = currentFuelAmount;
+            m_energyPercentages = m_FuelSource.EnergyPercentage;
         }
     }
 }

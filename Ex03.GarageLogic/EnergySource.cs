@@ -35,6 +35,11 @@ namespace Ex03.GarageLogic
             }
             set
             {
+                if (value > m_MaxEnergyAmount || value < 0)
+                {
+                    throw new ValueRangeException(0, m_MaxEnergyAmount, $"Invalid energy amount. Max allowed is {m_MaxEnergyAmount}");
+                }
+
                 m_CurrentEnergyAmount = value;
             }
         }

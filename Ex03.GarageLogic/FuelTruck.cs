@@ -66,6 +66,7 @@ namespace Ex03.GarageLogic
             m_HasRefrigeratedCargo = isRefrigerated;
             m_CargoVolume = cargoVolume;
             m_FuelSource.CurrentAmount = currentFuelAmount;
+            m_energyPercentages = m_FuelSource.EnergyPercentage;
         }
     }
 }

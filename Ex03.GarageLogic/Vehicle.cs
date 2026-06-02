@@ -9,7 +9,7 @@ namespace Ex03.GarageLogic
         private string m_modelName;
         private string m_licensePlateNumber;
         protected float m_energyPercentages;
-        protected Tyre[] m_tyresCollection; 
+        protected Tyre[] m_tyresCollection;
 
         public Vehicle(string i_LicensePlateNumber, string i_ModelName)
         {
@@ -37,6 +37,15 @@ namespace Ex03.GarageLogic
         public virtual void Charge(float i_AmountOfMinutesToCharge)
         {
             throw new ArgumentException("This vehicle isn't run by Electricity");
+        }
+
+        public void SetTyreDetails(string i_ManufacturerName, float i_CurrentAirPressure)
+        {
+            foreach (Tyre tyre in m_tyresCollection)
+            {
+                tyre.ManufacturerName = i_ManufacturerName;
+                tyre.CurrentAirPressure = i_CurrentAirPressure;
+            }
         }
 
         public abstract List<string> GetSpecialPrameters();

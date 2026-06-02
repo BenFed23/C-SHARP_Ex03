@@ -36,6 +36,7 @@ namespace Ex03.GarageLogic
             }
 
             m_ElectricSource.CurrentAmount = currentBattery;
+            m_energyPercentages = m_ElectricSource.EnergyPercentage;
         }
     }
 }
