@@ -72,21 +72,25 @@ namespace Ex03.GarageLogic
 
         public string[] loadVehicleDataBase()
         {
+            string[] lines = null;
             try
             {
-                string[] lines = File.ReadAllLines("VehiclesDB.txt");
-                return lines;
+                 lines = File.ReadAllLines("VehiclesDB.txt");
+               
             }
             catch (FileNotFoundException)
             {
                 Console.WriteLine("File Doesn't exist");
-                return new string[0];
+                
             }
             catch (IOException) 
             {
                 Console.WriteLine("An Eror Occurred while opening the file");
-                return new string[0];
+               
             }
+
+            return lines;
+          
            
         }
         public Dictionary<string, GarageVehicle>  GetDictionary() 
