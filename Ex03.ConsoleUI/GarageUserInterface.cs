@@ -4,10 +4,16 @@ using System.Collections.Generic;
 
 namespace Ex03.ConsoleUI
 {
+
     public class GarageUserInterface
     {
-        private GarageLogic.GarageManager garageManager;
+       
+        private GarageManager m_garageManager;
 
+        public GarageUserInterface(GarageManager i_garageManager)
+        {
+            m_garageManager = i_garageManager;
+        }
         public void DisplayGarageMenu()
         {
             bool isExitPressed = false;
@@ -102,7 +108,7 @@ namespace Ex03.ConsoleUI
         {
             getChangeStateValuesFromUser(out string vehicleLicenseNumber, out string newVehicleState);
             Enum.TryParse(newVehicleState, out eGarageStatus newGarageVehicleStatus);
-            garageManager.ChangeStateOfGarageVehicle(vehicleLicenseNumber, newGarageVehicleStatus);
+            m_garageManager.ChangeStateOfGarageVehicle(vehicleLicenseNumber, newGarageVehicleStatus);
         }
 
         private void getChangeStateValuesFromUser(out string o_VehicleLicenseNumber, out string o_NewVehicleState)
@@ -118,14 +124,14 @@ namespace Ex03.ConsoleUI
             getRefuelValuesFromUser(out string vehicleLicenseNumber, out string stringFuelType, out string stringAmountOfFuelToAdd);
             Enum.TryParse(stringFuelType, out eFuelType fuelType);
             float.TryParse(stringAmountOfFuelToAdd, out float amountOfFuelToAdd);
-            garageManager.RefuelVehicle(vehicleLicenseNumber, fuelType, amountOfFuelToAdd);
+            m_garageManager.RefuelVehicle(vehicleLicenseNumber, fuelType, amountOfFuelToAdd);
         }
 
         private void executeChargeOption()
         {
             getChargeValuesFromUser(out string vehicleLicenseNumber, out string stringAmountOfMinutesToAdd);
             float.TryParse(stringAmountOfMinutesToAdd, out float amountOfMinutesToAdd);
-            garageManager.ChargeVehicle(vehicleLicenseNumber, amountOfMinutesToAdd);
+            m_garageManager.ChargeVehicle(vehicleLicenseNumber, amountOfMinutesToAdd);
         }
 
         private void getChargeValuesFromUser(out string o_VehicleLicenseNumber, out string o_AmountOfMinutesToAdd)
@@ -152,7 +158,7 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("Please enter the vehicle's license plate number");
             string userLicensePlateNumberInput = Console.ReadLine();
 
-            if(garageManager.CheckIfVehicleInGarage(userLicensePlateNumberInput))
+            if(m_garageManager.CheckIfVehicleInGarage(userLicensePlateNumberInput))
             {
                 Console.WriteLine($"Vehicle with license plate number: {userLicensePlateNumberInput} is already in Garage. Updated status to 'In Repair'.");
             }
@@ -177,19 +183,63 @@ namespace Ex03.ConsoleUI
 
         private Vehicle getVehicleParamsAccordingToType(string i_VehicleType)
         {
-            List<string> currentVehicleParameters = garageManager.GetVehicleParameters(i_VehicleType);
+            List<string> currentVehicleParameters = GetVehicleParameters(i_VehicleType);
 
             foreach(string parameter in currentVehicleParameters)
             {
                 Console.WriteLine($"please enter the vehicle's {parameter}");
                 String assignedParameter = Console.ReadLine();
                 //check if valid
-                    //create parameter
+                //create parameter
                 // else Exception
             }
 
             //return vehicle 
             return null;
+        }
+
+        public List<string> GetVehicleParameters(string i_VehicleType)
+        {
+            Vehicle currentVehicle = VehicleCreator.CreateVehicle(i_VehicleType, null, null);
+            Type vehicleType = currentVehicle.GetType();
+
+            if (vehicleType.IsSubclassOf(typeof(Vehicle)))
+            {
+                //get parameters from user (after knowing which parameters)
+            }
+            else
+            {
+                throw new ArgumentException("You entered an invalid vehicle type");
+            }
+        }
+
+        public void ShowPlateList()
+        {
+            Dictionary<string, GarageVehicle> garageDictionary = m_garageManager.GetDictionary();
+            foreach (string plate in garageDictionary.Keys)
+            {
+                Console.WriteLine(plate);
+            }
+        }
+        public void ShowPlateLisAcourdingToState(eGarageStatus i_carStatus)
+        {
+            List<string> carPlatesWithGivenState = new List<string>();
+            Dictionary<string, GarageVehicle> garageDictionary = m_garageManager.GetDictionary();
+            foreach (KeyValuePair<string, GarageVehicle> car in garageDictionary)
+            {
+                if (car.Value.GarageStatus == i_carStatus)
+                {
+                    carPlatesWithGivenState.Add(car.Key);
+                }
+            }
+            PrintGivenList(carPlatesWithGivenState);
+        }
+        public void PrintGivenList(List<string> i_givenList)
+        {
+            foreach (string value in i_givenList)
+            {
+                Console.WriteLine(value);
+            }
         }
     }
 }
