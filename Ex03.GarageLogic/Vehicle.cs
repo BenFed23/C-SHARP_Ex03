@@ -22,6 +22,12 @@ namespace Ex03.GarageLogic
         {
             return m_tyresCollection;
         }
+
+        public abstract float MaxEnergyCapacity 
+        {
+            get;
+        }
+
         public string getVehicleLicensePlateNumber()
         {
             return m_licensePlateNumber;

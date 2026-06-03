@@ -10,7 +10,7 @@ namespace Ex03.GarageLogic
         private float m_CargoVolume;
         protected FuelSource m_FuelSource;
         private const int k_AmountOfWheels = 14;
-        private const int k_MaxAirPressure = 23;
+        private const int k_MaxAirPressure = 28;
 
         public FuelTruck(string i_ModelName, string i_LicensePlateNumber) : base(i_ModelName, i_LicensePlateNumber)
         {
@@ -18,9 +18,17 @@ namespace Ex03.GarageLogic
             for (int i = 0; i < m_tyresCollection.Length; i++)
             {
                 m_tyresCollection[i] = new Tyre(k_MaxAirPressure);
-                m_FuelSource = new FuelSource(125, eFuelType.Soler);
+                m_FuelSource = new FuelSource(125f, eFuelType.Soler);
                 m_HasRefrigeratedCargo = false;
                 m_CargoVolume = 0;
+            }
+        }
+
+        public override float MaxEnergyCapacity
+        {
+            get
+            {
+                return m_FuelSource.MaxCapacity;
             }
         }
 

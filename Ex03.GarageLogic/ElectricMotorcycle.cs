@@ -13,6 +13,14 @@ namespace Ex03.GarageLogic
             m_ElectricSource = new ElectricSource(3.0f);
         }
 
+        public override float MaxEnergyCapacity
+        {
+            get
+            {
+                return m_ElectricSource.MaxCapacity;
+            }
+        }
+
         public override void Charge(float i_AmountOfMinutesToCharge)
         {
             m_ElectricSource.chargeElectricVehicle(i_AmountOfMinutesToCharge / 60f);

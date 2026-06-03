@@ -7,9 +7,18 @@ namespace Ex03.GarageLogic
     internal class ElectricCar: Car
     {
         protected ElectricSource m_ElectricSource;
+
         public ElectricCar(string i_idPlate, string i_ModelName): base( i_idPlate, i_ModelName)
         {
             m_ElectricSource = new ElectricSource(4.6f);
+        }
+
+        public override float MaxEnergyCapacity
+        {
+            get
+            {
+                return m_ElectricSource.MaxCapacity;
+            }
         }
 
         public override void Charge(float i_AmountOfMinutesToCharge)

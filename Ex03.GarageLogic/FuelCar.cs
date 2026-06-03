@@ -11,8 +11,15 @@ namespace Ex03.GarageLogic
 
         public FuelCar( string i_idPlate, string  i_ModelName) : base( i_idPlate, i_ModelName)
         {
-            m_FuelSource = new FuelSource(51 , eFuelType.Octan95 );
-            
+            m_FuelSource = new FuelSource(51f , eFuelType.Octan95);
+        }
+
+        public override float MaxEnergyCapacity
+        {
+            get
+            {
+                return m_FuelSource.MaxCapacity;
+            }
         }
 
         public override void Refuel(float i_AmountOfFuelToAdd, eFuelType i_FuelType)

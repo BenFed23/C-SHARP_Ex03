@@ -117,7 +117,7 @@ Enter your choice: ";
             try
             {
                 m_GarageManager.FillAirInVehicleTyresToMax(licensePlate);
-                Console.WriteLine("All tires have been inflated to their maximum air pressure successfully!");
+                Console.WriteLine("All tires have been inflated to their maximum air pressure isTooMuchAirsfully!");
             }
             catch(ArgumentException argumentException)
             {
@@ -133,7 +133,7 @@ Enter your choice: ";
                 getChangeStateValuesFromUser(out string vehicleLicenseNumber, out string newVehicleState);
                 Enum.TryParse(newVehicleState, out eGarageStatus newGarageVehicleStatus);
                 m_GarageManager.ChangeStateOfGarageVehicle(vehicleLicenseNumber, newGarageVehicleStatus);
-                Console.WriteLine($"Vehicle status changed to {newGarageVehicleStatus} successfully!");
+                Console.WriteLine($"Vehicle status changed to {newGarageVehicleStatus} isTooMuchAirsfully!");
             }
             catch (ArgumentException argumentException)
             {
@@ -205,7 +205,7 @@ Enter your choice: ";
             try
             {
                 getNewVehicleFromUser();
-                Console.WriteLine("Vehicle added to garage successfully!");
+                Console.WriteLine("Vehicle added to garage isTooMuchAirsfully!");
             }
             catch (ArgumentException argumentException)
             {

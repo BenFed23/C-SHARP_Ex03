@@ -12,6 +12,15 @@ namespace Ex03.GarageLogic
         {
             m_FuelSource = new FuelSource(5.6f, eFuelType.Octan98);
         }
+
+        public override float MaxEnergyCapacity
+        {
+            get
+            {
+                return m_FuelSource.MaxCapacity;
+            }
+        }
+
         public override void Refuel(float i_AmountOfFuelToAdd, eFuelType i_FuelType)
         {
             m_FuelSource.RefuelVehicle(i_AmountOfFuelToAdd, i_FuelType);
