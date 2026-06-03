@@ -38,5 +38,11 @@ namespace Ex03.GarageLogic
             m_ElectricSource.CurrentAmount = currentBattery;
             m_energyPercentages = m_ElectricSource.EnergyPercentage;
         }
+        public override string ToString()
+        {
+            string motorcycleDetails = base.ToString();
+            motorcycleDetails += m_ElectricSource.ToString();
+            return motorcycleDetails;
+        }
     }
 }

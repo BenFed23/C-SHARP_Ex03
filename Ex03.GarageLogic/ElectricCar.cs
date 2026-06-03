@@ -40,10 +40,10 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            string details = base.ToString();
-            details += m_ElectricSource.ToString();
+            string ElectricCarDetails = base.ToString();
+            ElectricCarDetails += m_ElectricSource.ToString();
 
-            return details;
+            return ElectricCarDetails;
         }
     }
 }

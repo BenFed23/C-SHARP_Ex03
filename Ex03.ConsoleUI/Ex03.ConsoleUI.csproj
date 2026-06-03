@@ -41,6 +41,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="eFillterUserChoice.cs" />
     <Compile Include="eMenuOptions.cs" />
     <Compile Include="GarageUserInterface.cs" />
     <Compile Include="Program.cs" />

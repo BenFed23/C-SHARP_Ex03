@@ -67,5 +67,11 @@ namespace Ex03.GarageLogic
                 return (m_CurrentEnergyAmount/ m_CurrentEnergyAmount) * 100;
             }
         }
+        public override string ToString()
+        {
+            string EnergySourceDetails = m_CurrentEnergyAmount.ToString() + " " + m_MaxEnergyAmount.ToString();
+
+            return EnergySourceDetails;
+        }
     }
 }
