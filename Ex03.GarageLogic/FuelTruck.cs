@@ -34,9 +34,9 @@ namespace Ex03.GarageLogic
         {
             List<string> specialParameters = new List<string>();
 
-            specialParameters.Add("bool isRefrigerated");
-            specialParameters.Add("float cargoVolume");
-            specialParameters.Add("float currentFuelAmountInLiters");
+            specialParameters.Add("if it has refrigerated cargo");
+            specialParameters.Add("cargo volume");
+            specialParameters.Add("current fuel amount in liters");
 
             return specialParameters;
         }

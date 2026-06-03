@@ -21,7 +21,7 @@ namespace Ex03.GarageLogic
         {
             List<string> specialParameters = GetMotorcycleBaseParameters();
 
-            specialParameters.Add("float currentFuelAmountInLiters");
+            specialParameters.Add("current fuel amount in liters");
 
             return specialParameters;
         }

@@ -21,7 +21,7 @@ namespace Ex03.GarageLogic
         {
             List<string> specialParametes = GetCarBaseParameters();
      
-            specialParametes.Add("float currentBatteryTimeInHours");
+            specialParametes.Add("current battery time in hours");
 
             return specialParametes;
         }
