@@ -97,6 +97,10 @@ Enter your choice: ";
                         break;
                 }
             }
+            catch (ValueRangeException valueRangeException)
+            {
+                Console.WriteLine(valueRangeException.Message);
+            }
             catch (Exception exception)
             {
                 Console.WriteLine($"Error: {exception.Message}");
