@@ -33,7 +33,10 @@ namespace Ex03.GarageLogic
         }
         public override string ToString()
         {
-            return m_fuelType.ToString() + " " + m_CurrentEnergyAmount.ToString() + m_MaxEnergyAmount.ToString() ;
+            string fuelSourceDetails = base.ToString();
+            fuelSourceDetails += " " + "Fuel type: " + m_fuelType.ToString();
+
+            return fuelSourceDetails;
         }
 
     }
