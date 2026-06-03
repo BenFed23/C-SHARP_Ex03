@@ -79,7 +79,7 @@ namespace Ex03.GarageLogic
         public abstract void SetSpecialParameters(List<string> i_Parameters);
         public override string ToString()
         {
-            string vehileDetails = m_modelName + m_licensePlateNumber + m_energyPercentages;
+            string vehileDetails ="Model name: " + m_modelName + "" + "Liecense Plate Number: " + m_licensePlateNumber + " " + "remain energy precentages: " + m_energyPercentages;
 
             return vehileDetails;
         }

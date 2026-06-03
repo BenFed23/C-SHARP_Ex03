@@ -52,7 +52,7 @@ namespace Ex03.GarageLogic
         public override string ToString()
         {
             string carDetails =  base.ToString();
-            carDetails += m_carColor.ToString() + " " + m_numOfDoors.ToString();
+            carDetails += " " + "Car color: " + m_carColor.ToString() + " " + "Num doors in car: " + m_numOfDoors.ToString();
 
             return carDetails;
         }

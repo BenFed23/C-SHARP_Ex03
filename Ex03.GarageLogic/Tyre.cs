@@ -67,7 +67,7 @@ namespace Ex03.GarageLogic
         }
         public override string ToString()
         {
-            return m_ManufacturerName + " " + m_CurrentAirPresure;
+            return "Manufacture Name: " + m_ManufacturerName + " " + "Current tyre air presure: " + m_CurrentAirPresure ;
         }
     }
 }

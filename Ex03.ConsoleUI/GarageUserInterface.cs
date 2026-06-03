@@ -158,13 +158,25 @@ namespace Ex03.ConsoleUI
 
         private void getRefuelValuesFromUser(out string o_VehicleLicenseNumber, out string o_FuelType, out string o_AmountOfFuelToAdd)
         {
-            Console.WriteLine("Please enter license plate number:");
-            o_VehicleLicenseNumber = Console.ReadLine();
-            string fuelOptions = string.Join(", ", Enum.GetNames(typeof(eFuelType)));
-            Console.WriteLine("Please enter fuel type ({0}):", fuelOptions);
-            o_FuelType = Console.ReadLine();
-            Console.WriteLine("Please enter amount of fuel to add:");
-            o_AmountOfFuelToAdd = Console.ReadLine();
+            o_VehicleLicenseNumber = string.Empty;
+            o_FuelType = string.Empty;
+            o_AmountOfFuelToAdd = string.Empty;
+            try 
+            {
+                Console.WriteLine("Please enter license plate number:");
+                o_VehicleLicenseNumber = Console.ReadLine();
+                string fuelOptions = string.Join(", ", Enum.GetNames(typeof(eFuelType)));
+                Console.WriteLine("Please enter fuel type ({0}):", fuelOptions);
+                o_FuelType = Console.ReadLine();
+                Console.WriteLine("Please enter amount of fuel to add:");
+                o_AmountOfFuelToAdd = Console.ReadLine();
+            }
+            catch (ValueRangeException ex)
+            {
+                Console.WriteLine("Error: Value out of range!");
+                Console.WriteLine(ex.StackTrace);
+            }
+           
         }
 
         private void executeAddNewVehicle()
@@ -261,7 +273,15 @@ namespace Ex03.ConsoleUI
                     carPlatesWithGivenState.Add(car.Key);
                 }
             }
-            PrintGivenList(carPlatesWithGivenState);
+            if(carPlatesWithGivenState.Count > 0)
+            {
+                PrintGivenList(carPlatesWithGivenState);
+            }
+            else
+            {
+                Console.WriteLine("There are no vehiceles in " +  i_carStatus.ToString());
+            }
+            
         }
 
         public void PrintGivenList(List<string> i_givenList)
