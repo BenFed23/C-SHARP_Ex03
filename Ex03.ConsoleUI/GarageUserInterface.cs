@@ -4,10 +4,8 @@ using System.Collections.Generic;
 
 namespace Ex03.ConsoleUI
 {
-
     public class GarageUserInterface
     {
-
         private GarageManager m_GarageManager;
 
         public GarageUserInterface(GarageManager i_garageManager)
@@ -47,7 +45,7 @@ namespace Ex03.ConsoleUI
         {
             string menuTemplate = @"*** Welcome to the Garage Management System ***
         Please choose one of the following options:
-        1. Load vehicle data from file
+        1. Load vehicles data from file
         2. Add a new vehicle to the garage
         3. Display license numbers of vehicles in the garage
         4. Change a vehicle's status in garage
@@ -61,17 +59,21 @@ namespace Ex03.ConsoleUI
 
             Console.Write(menuTemplate);
         }
-
         private void executeUserChoice(eMenuOptions i_UserMenuChoice, ref bool io_IsExitPressed)
         {
             switch (i_UserMenuChoice)
             {
                 case eMenuOptions.LoadDataFromDBFile:
+                    Console.Clear();
+                   loadDataBaseIntoGarageData();
                     break;
                 case eMenuOptions.AddNewVehicleToGarage:
+                    Console.Clear();
                     executeAddNewVehicle();
                     break;
                 case eMenuOptions.ShowListOfLicensePlateNumbers:
+                    Console.Clear();
+                    ManageVehicleListPresentation();
                     break;
                 case eMenuOptions.ChangeVehicleStateInGarage:
                     executeChangeVehicleState();
@@ -85,6 +87,8 @@ namespace Ex03.ConsoleUI
                     executeChargeOption();
                     break;
                 case eMenuOptions.ShowFullVehicleDetails:
+                    Console.Clear();
+                    ShowVehiceleDetails();
                     break;
                 case eMenuOptions.Exit:
                     io_IsExitPressed = true;
@@ -236,9 +240,7 @@ namespace Ex03.ConsoleUI
 
             Console.WriteLine("Please enter owner's phone number:");
             o_OwnerPhone = Console.ReadLine();
-        }
-
-       
+        }    
         public void ShowPlateList()
         {
             Dictionary<string, GarageVehicle> garageDictionary = m_GarageManager.GetDictionary();
@@ -269,7 +271,6 @@ namespace Ex03.ConsoleUI
                 Console.WriteLine(value);
             }
         }
-
         public List<string> GetVehicleParameters(string i_VehicleType)
         {
             Vehicle currentVehicle = VehicleCreator.CreateVehicle(i_VehicleType, null, null);
@@ -284,25 +285,55 @@ namespace Ex03.ConsoleUI
                 throw new ArgumentException("You entered an invalid vehicle type");
             }
         }
-
-       
-        public void ShowPlateLisAcourdingToState(eGarageStatus i_carStatus)
+        public void ShowVehiceleDetails()
         {
-            List<string> carPlatesWithGivenState = new List<string>();
-            Dictionary<string, GarageVehicle> garageDictionary = m_GarageManager.GetDictionary();
-            foreach (KeyValuePair<string, GarageVehicle> car in garageDictionary)
+            Console.WriteLine("Enter a liecense plate number");
+            string licensePlate = Console.ReadLine();
+            try
             {
-                if (car.Value.GetVehicleStatus() == i_carStatus)
-                {
-                    carPlatesWithGivenState.Add(car.Key);
-                }
+                Console.WriteLine(m_GarageManager.GetDictionary()[licensePlate].ToString());
             }
-            PrintGivenList(carPlatesWithGivenState);
-        }
+            catch (KeyNotFoundException)
 
-        public void ShowVehiceleDetails(string i_licensePlate)
-        {
-            Console.WriteLine(m_GarageManager.GetDictionary()[i_licensePlate].ToString());
+            {
+                Console.WriteLine("The Liecense Plate is not in the System.");
+            }
         }
+           
+        public void loadDataBaseIntoGarageData()
+        {
+            m_GarageManager.loadVehicleDataBase();
+            Console.Clear();
+            Console.WriteLine(m_GarageManager.GetDictionary().Count.ToString() + " " + "Vehiceles" + " " + "where loaded to the System ");
+        }
+        public void ManageVehicleListPresentation() 
+        {
+            Console.Clear();
+            Console.WriteLine("choose 0 to see full list or 1 to see the filtered list ");
+            int userChoise = int.Parse(Console.ReadLine());
+            switch (userChoise)
+            {
+                case (int) eFillterUserChoice.All:
+                    Console.Clear();
+                    ShowPlateList();
+                    break;
+                case (int)eFillterUserChoice.FilterByVehicileState:
+                    Console.WriteLine("Wtite the car state to filter by: InRepair, Repaired, FullyPayed");
+                    if (Enum.TryParse(Console.ReadLine(), out eGarageStatus statusFilter))
+                    {
+                        Console.Clear() ;
+                        ShowPlateLiscenseAccordingToState(statusFilter);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid state entered.");
+                    }
+                    break;
+            }
+           
+
+
+        }
+       
     }
 }

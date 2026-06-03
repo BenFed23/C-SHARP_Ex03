@@ -6,8 +6,13 @@ namespace Ex03.GarageLogic
 {
     public class GarageManager
     {
-        private readonly Dictionary<string, GarageVehicle> m_VehiclesInGarage = new Dictionary<string, GarageVehicle>();
+       private const int k_CarType = 0;
+       private const int k_LicensePlate = 1;
+       private const int k_ModelName = 2;
+       private const int k_OwnerName = 6;
+       private const int k_OwnerPhone = 7;
 
+        private readonly Dictionary<string, GarageVehicle> m_VehiclesInGarage = new Dictionary<string, GarageVehicle>();
 
         public bool CheckIfVehicleInGarage(string i_LicensePlateNumber)
         {
@@ -26,8 +31,6 @@ namespace Ex03.GarageLogic
             GarageVehicle newVehicleInGarage = new GarageVehicle(i_Vehicle, i_OwnerName, i_OwnerPhone);
             m_VehiclesInGarage.Add(i_Vehicle.getVehicleLicensePlateNumber(), newVehicleInGarage);
         }
-
-
         public void ChangeStateOfGarageVehicle(string i_LicensePlateNumber, eGarageStatus i_NewGarageState)
         {
             GarageVehicle currentGarageVehicle = getVehicleByLicensePlateNumber(i_LicensePlateNumber);
@@ -55,11 +58,7 @@ namespace Ex03.GarageLogic
             {
                 tyre.InflateTire(tyre.MaxAirPressure - tyre.CurrentAirPressure);
             }
-
-           
         }
-
-
         private GarageVehicle getVehicleByLicensePlateNumber(string i_LicensePlateNumber)
         {
             if(!m_VehiclesInGarage.TryGetValue(i_LicensePlateNumber, out GarageVehicle desiredGarageVehicle))
@@ -70,12 +69,18 @@ namespace Ex03.GarageLogic
             return desiredGarageVehicle;
         }
 
-        public string[] loadVehicleDataBase()
+        public void loadVehicleDataBase()
         {
             string[] lines = null;
             try
             {
                  lines = File.ReadAllLines("VehiclesDB.txt");
+                foreach (string line in lines)
+                {
+                    string[] vehicileDetails = line.Split(new char[] { ',' });
+                    Vehicle newVehicele = VehicleCreator.CreateVehicle(vehicileDetails[k_CarType], vehicileDetails[k_LicensePlate] , vehicileDetails[k_ModelName]);
+                    AddVehicleToGarage(newVehicele, vehicileDetails[k_OwnerName], vehicileDetails[k_OwnerPhone]);
+                }
                
             }
             catch (FileNotFoundException)
@@ -86,12 +91,7 @@ namespace Ex03.GarageLogic
             catch (IOException) 
             {
                 Console.WriteLine("An Eror Occurred while opening the file");
-               
             }
-
-            return lines;
-          
-           
         }
         public Dictionary<string, GarageVehicle>  GetDictionary() 
         {
