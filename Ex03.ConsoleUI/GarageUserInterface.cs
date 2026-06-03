@@ -227,6 +227,7 @@ Enter your choice: ";
             newVehicle.SetBaseVehicleParameters(baseUserAnswers);
             List<string> specialParameters = newVehicle.GetSpecialPrameters(); 
             List<string> specialUserAnswers = getVehicleParametersFromUser(specialParameters);
+            newVehicle.SetSpecialParameters(specialUserAnswers);
             getOwnerDetails(out string ownerName, out string ownerPhone);
             m_GarageManager.AddVehicleToGarage(newVehicle, ownerName, ownerPhone);
             Console.WriteLine("\nVehicle added to garage successfully!");
@@ -264,7 +265,8 @@ Enter your choice: ";
 
             Console.WriteLine("Please enter owner's phone number:");
             o_OwnerPhone = Console.ReadLine();
-        }    
+        }  
+        
         public void ShowPlateList()
         {
             Dictionary<string, GarageVehicle> garageDictionary = m_GarageManager.GetDictionary();
