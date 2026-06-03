@@ -62,43 +62,44 @@ Enter your choice: ";
         }
         private void executeUserChoice(eMenuOptions i_UserMenuChoice, ref bool io_IsExitPressed)
         {
-            switch (i_UserMenuChoice)
+            try
             {
-                case eMenuOptions.LoadDataFromDBFile:
-                    Console.Clear();
-                    loadDataBaseIntoGarageData();
-                    break;
-                case eMenuOptions.AddNewVehicleToGarage:
-                    Console.Clear();
-                    executeAddNewVehicle();
-                    break;
-                case eMenuOptions.ShowListOfLicensePlateNumbers:
-                    Console.Clear();
-                    ManageVehicleListPresentation();
-                    break;
-                case eMenuOptions.ChangeVehicleStateInGarage:
-                    Console.Clear();
-                    executeChangeVehicleState();
-                    break;
-                case eMenuOptions.InflateTiresToMaxAirPressure:
-                    Console.Clear();
-                    executeInflateTiresToMax();
-                    break;
-                case eMenuOptions.RefuelVehicle:
-                    Console.Clear();
-                    executeRefuelOption();
-                    break;
-                case eMenuOptions.ChargeVehicle:
-                    Console.Clear();
-                    executeChargeOption();
-                    break;
-                case eMenuOptions.ShowFullVehicleDetails:
-                    Console.Clear();
-                    ShowVehiceleDetails();
-                    break;
-                case eMenuOptions.Exit:
-                    io_IsExitPressed = true;
-                    break;
+                Console.Clear();
+
+                switch (i_UserMenuChoice)
+                {
+                    case eMenuOptions.LoadDataFromDBFile:
+                        loadDataBaseIntoGarageData();
+                        break;
+                    case eMenuOptions.AddNewVehicleToGarage:
+                        executeAddNewVehicle();
+                        break;
+                    case eMenuOptions.ShowListOfLicensePlateNumbers:
+                        ManageVehicleListPresentation();
+                        break;
+                    case eMenuOptions.ChangeVehicleStateInGarage:
+                        executeChangeVehicleState();
+                        break;
+                    case eMenuOptions.InflateTiresToMaxAirPressure:
+                        executeInflateTiresToMax();
+                        break;
+                    case eMenuOptions.RefuelVehicle:
+                        executeRefuelOption();
+                        break;
+                    case eMenuOptions.ChargeVehicle:
+                        executeChargeOption();
+                        break;
+                    case eMenuOptions.ShowFullVehicleDetails:
+                        ShowVehiceleDetails();
+                        break;
+                    case eMenuOptions.Exit:
+                        io_IsExitPressed = true;
+                        break;
+                }
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine($"Error: {exception.Message}");
             }
         }
 
