@@ -90,7 +90,7 @@ Enter your choice: ";
                         executeChargeOption();
                         break;
                     case eMenuOptions.ShowFullVehicleDetails:
-                        ShowVehiceleDetails();
+                        ShowVehicleDetails();
                         break;
                     case eMenuOptions.Exit:
                         io_IsExitPressed = true;
@@ -105,6 +105,8 @@ Enter your choice: ";
             {
                 Console.WriteLine($"Error: {exception.Message}");
             }
+
+            Console.WriteLine();
         }
 
         private void executeInflateTiresToMax()
@@ -277,9 +279,16 @@ Enter your choice: ";
         public void ShowPlateList()
         {
             Dictionary<string, GarageVehicle> garageDictionary = m_GarageManager.GetDictionary();
-            foreach (string plate in garageDictionary.Keys)
+            if (garageDictionary.Count > 0)
             {
-                Console.WriteLine(plate);
+                foreach (string plate in garageDictionary.Keys)
+                {
+                    Console.WriteLine(plate);
+                }
+            }
+            else
+            {
+                Console.WriteLine("No Vehicles in garage");
             }
         }
 
@@ -287,6 +296,7 @@ Enter your choice: ";
         {
             List<string> carPlatesWithGivenState = new List<string>();
             Dictionary<string, GarageVehicle> garageDictionary = m_GarageManager.GetDictionary();
+          
             foreach (KeyValuePair<string, GarageVehicle> car in garageDictionary)
             {
                 if (car.Value.GetVehicleStatus() == i_carStatus)
@@ -294,7 +304,15 @@ Enter your choice: ";
                     carPlatesWithGivenState.Add(car.Key);
                 }
             }
-            PrintGivenList(carPlatesWithGivenState);
+
+            if (carPlatesWithGivenState.Count > 0)
+            {
+                PrintGivenList(carPlatesWithGivenState);
+            }
+            else
+            {
+                Console.WriteLine($"No Vehicles in '{i_carStatus}' status in the garage");
+            }
         }
 
         public void PrintGivenList(List<string> i_givenList)
@@ -320,18 +338,17 @@ Enter your choice: ";
             }
         }
 
-        public void ShowVehiceleDetails()
+        public void ShowVehicleDetails()
         {
-            Console.WriteLine("Enter a liecense plate number");
+            Console.WriteLine("Enter a license plate number");
             string licensePlate = Console.ReadLine();
             try
             {
                 Console.WriteLine(m_GarageManager.GetDictionary()[licensePlate].ToString());
             }
             catch (KeyNotFoundException)
-
             {
-                Console.WriteLine("The Liecense Plate is not in the System.");
+                Console.WriteLine("The License Plate is not in the System.");
             }
         }
            

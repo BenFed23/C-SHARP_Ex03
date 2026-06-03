@@ -78,7 +78,7 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return string.Format(" Current amount: {0} {1}, Max capacity: {2} {1}", m_CurrentEnergyAmount, UnitName, m_MaxEnergyAmount);
+            return string.Format("Current amount: {0} {1}, Max capacity: {2} {1}", m_CurrentEnergyAmount, UnitName, m_MaxEnergyAmount);
         }
     }
 }

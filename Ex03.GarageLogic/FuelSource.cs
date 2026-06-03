@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Text;
 
 namespace Ex03.GarageLogic
 {
@@ -31,9 +31,16 @@ namespace Ex03.GarageLogic
                 throw new ArgumentException("Wrong fuel type");
             }
         }
+
         public override string ToString()
         {
-            return base.ToString() + " Fuel type: " + FuelType.ToString();
+            StringBuilder fuelSourceDetails = new StringBuilder();
+
+            fuelSourceDetails.AppendLine("Energy Type: Fuel");
+            fuelSourceDetails.AppendLine(string.Format("Fuel Type: {0}", m_fuelType));
+            fuelSourceDetails.Append(base.ToString());
+
+            return fuelSourceDetails.ToString();
         }
 
         protected override string UnitName

@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
-
 
 namespace Ex03.GarageLogic
 {
@@ -42,7 +42,13 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return base.ToString();
+            StringBuilder electricMotorcycleDetails = new StringBuilder();
+
+            electricMotorcycleDetails.AppendLine(base.ToString());
+            electricMotorcycleDetails.AppendLine("*** Engine Details: ***");
+            electricMotorcycleDetails.AppendLine(m_ElectricSource.ToString());
+
+            return electricMotorcycleDetails.ToString();
         }
     }
 }

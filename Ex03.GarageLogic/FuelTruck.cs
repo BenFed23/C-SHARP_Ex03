@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
-
 
 namespace Ex03.GarageLogic
 {
@@ -71,10 +71,21 @@ namespace Ex03.GarageLogic
        
         public override string ToString()
         {
-            string vehicleDetails = base.ToString();
-            vehicleDetails += " " + "Cargo volum: " + m_CargoVolume + " " + "Has frozen cargo: " + m_HasRefrigeratedCargo + " " + m_FuelSource.ToString();
+            StringBuilder truckDetails = new StringBuilder();
 
-            return vehicleDetails;
+            truckDetails.AppendLine(base.ToString());
+            truckDetails.AppendLine(string.Format("Has Refrigerated Cargo: {0}", m_HasRefrigeratedCargo ? "Yes" : "No"));
+            truckDetails.AppendLine(string.Format("Cargo Volume: {0}", m_CargoVolume));
+            if (m_tyresCollection != null && m_tyresCollection.Length > 0)
+            {
+                truckDetails.AppendLine(string.Format("Wheels Information ({0} wheels):", m_tyresCollection.Length));
+                truckDetails.AppendLine(m_tyresCollection[0].ToString());
+            }
+
+            truckDetails.AppendLine("*** Engine Details: ***");
+            truckDetails.Append(m_FuelSource.ToString());
+
+            return truckDetails.ToString();
         }
     }
 }

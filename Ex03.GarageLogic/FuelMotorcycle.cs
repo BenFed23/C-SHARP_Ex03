@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
 
 namespace Ex03.GarageLogic
@@ -42,11 +43,16 @@ namespace Ex03.GarageLogic
             m_FuelSource.CurrentAmount = currentFuelAmount;
             m_energyPercentages = m_FuelSource.EnergyPercentage;
         }
+
         public override string ToString()
         {
-            string fuelMotorcycleDetails = base.ToString() + " " + m_FuelSource.ToString();
+            StringBuilder fuelMotorcycleDetails = new StringBuilder();
 
-            return fuelMotorcycleDetails;
+            fuelMotorcycleDetails.AppendLine(base.ToString());
+            fuelMotorcycleDetails.AppendLine("*** Engine Details: ***");
+            fuelMotorcycleDetails.Append(m_FuelSource.ToString());
+
+            return fuelMotorcycleDetails.ToString();
         }
     }
 }
