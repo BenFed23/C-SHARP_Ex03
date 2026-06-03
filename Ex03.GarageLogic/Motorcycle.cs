@@ -47,7 +47,7 @@ namespace Ex03.GarageLogic
         }
         public override string ToString()
         {
-            string motorcycleDetails = base.ToString() + m_LicenseType.ToString() + m_EngineVolume.ToString();
+            string motorcycleDetails = base.ToString() + " " + "License type: " + m_LicenseType.ToString() + " " + "Engine volum: " + m_EngineVolume.ToString();
             
             return motorcycleDetails;
         }

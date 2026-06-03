@@ -15,7 +15,9 @@ namespace Ex03.GarageLogic
         }
         public override string ToString()
         {
-            return "Electricity" + m_CurrentEnergyAmount.ToString() + " " + m_MaxEnergyAmount.ToString();
+
+            return "Electricity: " + " " + base.ToString();
+
         }
     }
 }

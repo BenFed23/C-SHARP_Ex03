@@ -69,7 +69,7 @@ namespace Ex03.GarageLogic
         }
         public override string ToString()
         {
-            string EnergySourceDetails = m_CurrentEnergyAmount.ToString() + " " + m_MaxEnergyAmount.ToString();
+            string EnergySourceDetails = " " + "Current energy amount:  " + m_CurrentEnergyAmount.ToString() + " " + "Max enegy capacity: " + m_MaxEnergyAmount.ToString();
 
             return EnergySourceDetails;
         }

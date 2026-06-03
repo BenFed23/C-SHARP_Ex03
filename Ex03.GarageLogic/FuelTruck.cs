@@ -72,7 +72,7 @@ namespace Ex03.GarageLogic
         public override string ToString()
         {
             string vehicleDetails = base.ToString();
-            vehicleDetails += m_CargoVolume + " " + m_HasRefrigeratedCargo + " " + m_FuelSource.ToString();
+            vehicleDetails += " " + "Cargo volum: " + m_CargoVolume + " " + "Has frozen cargo: " + m_HasRefrigeratedCargo + " " + m_FuelSource.ToString();
 
             return vehicleDetails;
         }

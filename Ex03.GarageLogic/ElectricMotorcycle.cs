@@ -42,6 +42,7 @@ namespace Ex03.GarageLogic
         {
             string motorcycleDetails = base.ToString();
             motorcycleDetails += m_ElectricSource.ToString();
+
             return motorcycleDetails;
         }
     }
