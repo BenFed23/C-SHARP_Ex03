@@ -66,7 +66,7 @@ Enter your choice: ";
             {
                 case eMenuOptions.LoadDataFromDBFile:
                     Console.Clear();
-                   loadDataBaseIntoGarageData();
+                    loadDataBaseIntoGarageData();
                     break;
                 case eMenuOptions.AddNewVehicleToGarage:
                     Console.Clear();
@@ -77,15 +77,19 @@ Enter your choice: ";
                     ManageVehicleListPresentation();
                     break;
                 case eMenuOptions.ChangeVehicleStateInGarage:
+                    Console.Clear();
                     executeChangeVehicleState();
                     break;
                 case eMenuOptions.InflateTiresToMaxAirPressure:
+                    Console.Clear();
                     executeInflateTiresToMax();
                     break;
                 case eMenuOptions.RefuelVehicle:
+                    Console.Clear();
                     executeRefuelOption();
                     break;
                 case eMenuOptions.ChargeVehicle:
+                    Console.Clear();
                     executeChargeOption();
                     break;
                 case eMenuOptions.ShowFullVehicleDetails:
@@ -114,12 +118,6 @@ Enter your choice: ";
             }
         }
 
-        private void executeLoadData()
-        {
-            string[] vehicleData = m_GarageManager.loadVehicleDataBase();
-            Console.WriteLine("Loaded data from DB file successfully");
-
-        }
 
         private void executeChangeVehicleState()
         {
@@ -296,6 +294,7 @@ Enter your choice: ";
                 Console.WriteLine(value);
             }
         }
+        
         public List<string> GetVehicleParameters(string i_VehicleType)
         {
             Vehicle currentVehicle = VehicleCreator.CreateVehicle(i_VehicleType, null, null);
@@ -310,6 +309,7 @@ Enter your choice: ";
                 throw new ArgumentException("You entered an invalid vehicle type");
             }
         }
+
         public void ShowVehiceleDetails()
         {
             Console.WriteLine("Enter a liecense plate number");
@@ -329,8 +329,9 @@ Enter your choice: ";
         {
             m_GarageManager.loadVehicleDataBase();
             Console.Clear();
-            Console.WriteLine(m_GarageManager.GetDictionary().Count.ToString() + " " + "Vehiceles" + " " + "where loaded to the System ");
+            Console.WriteLine(m_GarageManager.GetDictionary().Count.ToString() + " " + "Vehicles" + " " + "were loaded to the System ");
         }
+
         public void ManageVehicleListPresentation() 
         {
             Console.Clear();
@@ -343,11 +344,11 @@ Enter your choice: ";
                     ShowPlateList();
                     break;
                 case (int)eFillterUserChoice.FilterByVehicileState:
-                    Console.WriteLine("Wtite the car state to filter by: InRepair, Repaired, FullyPayed");
+                    Console.WriteLine("Write the car state to filter by: InRepair, Repaired, FullyPayed");
                     if (Enum.TryParse(Console.ReadLine(), out eGarageStatus statusFilter))
                     {
                         Console.Clear() ;
-                        ShowPlateLiscenseAccordingToState(statusFilter);
+                        ShowPlateLicenseAccordingToState(statusFilter);
                     }
                     else
                     {
