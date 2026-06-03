@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
-
 
 namespace Ex03.GarageLogic
 {
@@ -22,6 +22,12 @@ namespace Ex03.GarageLogic
         {
             return m_tyresCollection;
         }
+
+        public abstract float MaxEnergyCapacity 
+        {
+            get;
+        }
+
         public string getVehicleLicensePlateNumber()
         {
             return m_licensePlateNumber;
@@ -76,12 +82,18 @@ namespace Ex03.GarageLogic
         }
 
         public abstract List<string> GetSpecialPrameters();
+
         public abstract void SetSpecialParameters(List<string> i_Parameters);
+
         public override string ToString()
         {
-            string vehileDetails ="Model Name: " + m_modelName + " " + "License plate: " + m_licensePlateNumber + " " +" vehicele Energy precentage:  " + m_energyPercentages;
+            StringBuilder vehicleDetails = new StringBuilder();
 
-            return vehileDetails;
+            vehicleDetails.AppendLine(string.Format("License Plate: {0}", m_licensePlateNumber));
+            vehicleDetails.AppendLine(string.Format("Model Name: {0}", m_modelName));
+            vehicleDetails.Append(string.Format("Energy Percentage: {0}%", (int)m_energyPercentages));
+
+            return vehicleDetails.ToString();
         }
 
     }

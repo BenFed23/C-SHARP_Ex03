@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace Ex03.GarageLogic
 {
@@ -9,15 +10,27 @@ namespace Ex03.GarageLogic
 
         }
 
+        protected override string UnitName
+        {
+            get
+            {
+                return "Hours";
+            }
+        }
+
         public void chargeElectricVehicle(float i_HoursToAdd)
         {
             this.AddEnergy(i_HoursToAdd);
         }
+
         public override string ToString()
         {
+            StringBuilder electricSourceDetails = new StringBuilder();
 
-            return "Electricity: " + " " + base.ToString();
+            electricSourceDetails.AppendLine("Energy Type: Electricity");
+            electricSourceDetails.Append(base.ToString());
 
+            return electricSourceDetails.ToString();
         }
     }
 }

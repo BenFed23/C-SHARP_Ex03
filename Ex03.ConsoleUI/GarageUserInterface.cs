@@ -62,40 +62,51 @@ Enter your choice: ";
         }
         private void executeUserChoice(eMenuOptions i_UserMenuChoice, ref bool io_IsExitPressed)
         {
-            switch (i_UserMenuChoice)
+            try
             {
-                case eMenuOptions.LoadDataFromDBFile:
-                    Console.Clear();
-                   loadDataBaseIntoGarageData();
-                    break;
-                case eMenuOptions.AddNewVehicleToGarage:
-                    Console.Clear();
-                    executeAddNewVehicle();
-                    break;
-                case eMenuOptions.ShowListOfLicensePlateNumbers:
-                    Console.Clear();
-                    ManageVehicleListPresentation();
-                    break;
-                case eMenuOptions.ChangeVehicleStateInGarage:
-                    executeChangeVehicleState();
-                    break;
-                case eMenuOptions.InflateTiresToMaxAirPressure:
-                    executeInflateTiresToMax();
-                    break;
-                case eMenuOptions.RefuelVehicle:
-                    executeRefuelOption();
-                    break;
-                case eMenuOptions.ChargeVehicle:
-                    executeChargeOption();
-                    break;
-                case eMenuOptions.ShowFullVehicleDetails:
-                    Console.Clear();
-                    ShowVehiceleDetails();
-                    break;
-                case eMenuOptions.Exit:
-                    io_IsExitPressed = true;
-                    break;
+                Console.Clear();
+
+                switch (i_UserMenuChoice)
+                {
+                    case eMenuOptions.LoadDataFromDBFile:
+                        loadDataBaseIntoGarageData();
+                        break;
+                    case eMenuOptions.AddNewVehicleToGarage:
+                        executeAddNewVehicle();
+                        break;
+                    case eMenuOptions.ShowListOfLicensePlateNumbers:
+                        ManageVehicleListPresentation();
+                        break;
+                    case eMenuOptions.ChangeVehicleStateInGarage:
+                        executeChangeVehicleState();
+                        break;
+                    case eMenuOptions.InflateTiresToMaxAirPressure:
+                        executeInflateTiresToMax();
+                        break;
+                    case eMenuOptions.RefuelVehicle:
+                        executeRefuelOption();
+                        break;
+                    case eMenuOptions.ChargeVehicle:
+                        executeChargeOption();
+                        break;
+                    case eMenuOptions.ShowFullVehicleDetails:
+                        ShowVehicleDetails();
+                        break;
+                    case eMenuOptions.Exit:
+                        io_IsExitPressed = true;
+                        break;
+                }
             }
+            catch (ValueRangeException valueRangeException)
+            {
+                Console.WriteLine(valueRangeException.Message);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine($"Error: {exception.Message}");
+            }
+
+            Console.WriteLine();
         }
 
         private void executeInflateTiresToMax()
@@ -106,7 +117,7 @@ Enter your choice: ";
             try
             {
                 m_GarageManager.FillAirInVehicleTyresToMax(licensePlate);
-                Console.WriteLine("All tires have been inflated to their maximum air pressure successfully");
+                Console.WriteLine("All tires have been inflated to their maximum air pressure isTooMuchAirsfully!");
             }
             catch(ArgumentException argumentException)
             {
@@ -114,12 +125,6 @@ Enter your choice: ";
             }
         }
 
-        private void executeLoadData()
-        {
-            string[] vehicleData = m_GarageManager.loadVehicleDataBase();
-            Console.WriteLine("Loaded data from DB file successfully");
-
-        }
 
         private void executeChangeVehicleState()
         {
@@ -128,6 +133,7 @@ Enter your choice: ";
                 getChangeStateValuesFromUser(out string vehicleLicenseNumber, out string newVehicleState);
                 Enum.TryParse(newVehicleState, out eGarageStatus newGarageVehicleStatus);
                 m_GarageManager.ChangeStateOfGarageVehicle(vehicleLicenseNumber, newGarageVehicleStatus);
+                Console.WriteLine($"Vehicle status changed to {newGarageVehicleStatus} isTooMuchAirsfully!");
             }
             catch (ArgumentException argumentException)
             {
@@ -152,6 +158,7 @@ Enter your choice: ";
                 Enum.TryParse(stringFuelType, out eFuelType fuelType);
                 float.TryParse(stringAmountOfFuelToAdd, out float amountOfFuelToAdd);
                 m_GarageManager.RefuelVehicle(vehicleLicenseNumber, fuelType, amountOfFuelToAdd);
+                Console.WriteLine($"Added {amountOfFuelToAdd} amount of fuel");
             }
             catch (ArgumentException argumentException)
             {
@@ -166,6 +173,7 @@ Enter your choice: ";
                 getChargeValuesFromUser(out string vehicleLicenseNumber, out string stringAmountOfMinutesToAdd);
                 float.TryParse(stringAmountOfMinutesToAdd, out float amountOfMinutesToAdd);
                 m_GarageManager.ChargeVehicle(vehicleLicenseNumber, amountOfMinutesToAdd);
+                Console.WriteLine($"Charged {amountOfMinutesToAdd} Minutes");
             }
             catch (ArgumentException argumentException)
             {
@@ -197,6 +205,7 @@ Enter your choice: ";
             try
             {
                 getNewVehicleFromUser();
+                Console.WriteLine("Vehicle added to garage isTooMuchAirsfully!");
             }
             catch (ArgumentException argumentException)
             {
@@ -228,9 +237,9 @@ Enter your choice: ";
             newVehicle.SetBaseVehicleParameters(baseUserAnswers);
             List<string> specialParameters = newVehicle.GetSpecialPrameters(); 
             List<string> specialUserAnswers = getVehicleParametersFromUser(specialParameters);
+            newVehicle.SetSpecialParameters(specialUserAnswers);
             getOwnerDetails(out string ownerName, out string ownerPhone);
             m_GarageManager.AddVehicleToGarage(newVehicle, ownerName, ownerPhone);
-            Console.WriteLine("\nVehicle added to garage successfully!");
         }
 
         private string getValidatedVehicleType()
@@ -265,13 +274,21 @@ Enter your choice: ";
 
             Console.WriteLine("Please enter owner's phone number:");
             o_OwnerPhone = Console.ReadLine();
-        }    
+        }  
+        
         public void ShowPlateList()
         {
             Dictionary<string, GarageVehicle> garageDictionary = m_GarageManager.GetDictionary();
-            foreach (string plate in garageDictionary.Keys)
+            if (garageDictionary.Count > 0)
             {
-                Console.WriteLine(plate);
+                foreach (string plate in garageDictionary.Keys)
+                {
+                    Console.WriteLine(plate);
+                }
+            }
+            else
+            {
+                Console.WriteLine("No Vehicles in garage");
             }
         }
 
@@ -279,6 +296,7 @@ Enter your choice: ";
         {
             List<string> carPlatesWithGivenState = new List<string>();
             Dictionary<string, GarageVehicle> garageDictionary = m_GarageManager.GetDictionary();
+          
             foreach (KeyValuePair<string, GarageVehicle> car in garageDictionary)
             {
                 if (car.Value.GetVehicleStatus() == i_carStatus)
@@ -286,7 +304,15 @@ Enter your choice: ";
                     carPlatesWithGivenState.Add(car.Key);
                 }
             }
-            PrintGivenList(carPlatesWithGivenState);
+
+            if (carPlatesWithGivenState.Count > 0)
+            {
+                PrintGivenList(carPlatesWithGivenState);
+            }
+            else
+            {
+                Console.WriteLine($"No Vehicles in '{i_carStatus}' status in the garage");
+            }
         }
 
         public void PrintGivenList(List<string> i_givenList)
@@ -296,6 +322,7 @@ Enter your choice: ";
                 Console.WriteLine(value);
             }
         }
+        
         public List<string> GetVehicleParameters(string i_VehicleType)
         {
             Vehicle currentVehicle = VehicleCreator.CreateVehicle(i_VehicleType, null, null);
@@ -310,18 +337,18 @@ Enter your choice: ";
                 throw new ArgumentException("You entered an invalid vehicle type");
             }
         }
-        public void ShowVehiceleDetails()
+
+        public void ShowVehicleDetails()
         {
-            Console.WriteLine("Enter a liecense plate number");
+            Console.WriteLine("Enter a license plate number");
             string licensePlate = Console.ReadLine();
             try
             {
                 Console.WriteLine(m_GarageManager.GetDictionary()[licensePlate].ToString());
             }
             catch (KeyNotFoundException)
-
             {
-                Console.WriteLine("The Liecense Plate is not in the System.");
+                Console.WriteLine("The License Plate is not in the System.");
             }
         }
            
@@ -329,8 +356,9 @@ Enter your choice: ";
         {
             m_GarageManager.loadVehicleDataBase();
             Console.Clear();
-            Console.WriteLine(m_GarageManager.GetDictionary().Count.ToString() + " " + "Vehiceles" + " " + "where loaded to the System ");
+            Console.WriteLine(m_GarageManager.GetDictionary().Count.ToString() + " " + "Vehicles" + " " + "were loaded to the System ");
         }
+
         public void ManageVehicleListPresentation() 
         {
             Console.Clear();
@@ -343,11 +371,11 @@ Enter your choice: ";
                     ShowPlateList();
                     break;
                 case (int)eFillterUserChoice.FilterByVehicileState:
-                    Console.WriteLine("Wtite the car state to filter by: InRepair, Repaired, FullyPayed");
+                    Console.WriteLine("Write the car state to filter by: InRepair, Repaired, FullyPayed");
                     if (Enum.TryParse(Console.ReadLine(), out eGarageStatus statusFilter))
                     {
                         Console.Clear() ;
-                        ShowPlateLiscenseAccordingToState(statusFilter);
+                        ShowPlateLicenseAccordingToState(statusFilter);
                     }
                     else
                     {

@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
-
 
 namespace Ex03.GarageLogic
 {
@@ -11,13 +11,19 @@ namespace Ex03.GarageLogic
 
         public FuelCar( string i_idPlate, string  i_ModelName) : base( i_idPlate, i_ModelName)
         {
-            m_FuelSource = new FuelSource(51 , eFuelType.Octan95 );
-            
+            m_FuelSource = new FuelSource(51f , eFuelType.Octan95);
+        }
+
+        public override float MaxEnergyCapacity
+        {
+            get
+            {
+                return m_FuelSource.MaxCapacity;
+            }
         }
 
         public override void Refuel(float i_AmountOfFuelToAdd, eFuelType i_FuelType)
         {
-
             m_FuelSource.RefuelVehicle(i_AmountOfFuelToAdd, i_FuelType);
             m_energyPercentages = (m_FuelSource.CurrentAmount/m_FuelSource.MaxCapacity)*100; 
         }
@@ -26,7 +32,7 @@ namespace Ex03.GarageLogic
         {
             List<string> specialParameters = GetCarBaseParameters();
 
-            specialParameters.Add("float currentFuelAmountInLiters");
+            specialParameters.Add("current fuel amount in liters");
 
             return specialParameters;
         }
@@ -46,18 +52,17 @@ namespace Ex03.GarageLogic
 
             m_FuelSource.CurrentAmount = currentFuelAmount;
             m_energyPercentages = m_FuelSource.EnergyPercentage;
-
         }
+
         public override string ToString()
         {
-            string fueldetails = base.ToString();
-            fueldetails += " " + m_FuelSource.ToString();
+            StringBuilder fuelCarDetails = new StringBuilder();
 
-            return fueldetails;
+            fuelCarDetails.AppendLine(base.ToString());
+            fuelCarDetails.AppendLine("*** Engine Details: ***");
+            fuelCarDetails.Append(m_FuelSource.ToString());
+
+            return fuelCarDetails.ToString();
         }
-      
-
-
-
     } 
 }

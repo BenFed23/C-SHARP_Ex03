@@ -1,44 +1,44 @@
 ﻿using System;
-
+using System.Text;
 
 namespace Ex03.GarageLogic
 {
     public class Tyre
     {
         private string m_ManufacturerName;
-        private float m_CurrentAirPresure;
-        private float m_MaxAirPresure;
+        private float m_CurrentAirPressure;
+        private float m_MaxAirPressure;
 
         public Tyre(float i_MaxAirPresure)
         {
-            m_MaxAirPresure = i_MaxAirPresure;
-            m_CurrentAirPresure = 0;
+            m_MaxAirPressure = i_MaxAirPresure;
+            m_CurrentAirPressure = 0;
         }
 
-        public bool InflateTire(float i_airToFile) 
+        public bool InflateTire(float i_amountOfAirToFill) 
         {
-            bool succes = true;
-            if (m_CurrentAirPresure + i_airToFile > m_MaxAirPresure) 
+            bool isTooMuchAir = false;
+            if (m_CurrentAirPressure + i_amountOfAirToFill > m_MaxAirPressure) 
             {
-                succes = false;
+                isTooMuchAir = true;
             }
             else 
             {
-                m_CurrentAirPresure += i_airToFile;
+                m_CurrentAirPressure += i_amountOfAirToFill;
             }
 
-            return succes;
+            return isTooMuchAir;
         }
 
         public float MaxAirPressure
         {
             get
             {
-                return m_MaxAirPresure;
+                return m_MaxAirPressure;
             }
             set
             {
-                m_MaxAirPresure = value;
+                m_MaxAirPressure = value;
             }
         }
 
@@ -46,11 +46,11 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return m_CurrentAirPresure;
+                return m_CurrentAirPressure;
             }
             set
             {
-                m_CurrentAirPresure = value;
+                m_CurrentAirPressure = value;
             }
         }
 
@@ -65,9 +65,15 @@ namespace Ex03.GarageLogic
                 m_ManufacturerName = value;
             }
         }
+
         public override string ToString()
         {
-            return " " + "Manufacture tyre Name: " + m_ManufacturerName + " " + "Tyre current air pressure: " + m_CurrentAirPresure;
+            StringBuilder tyreDetails = new StringBuilder();
+
+            tyreDetails.AppendLine(string.Format("Manufacturer: {0}", m_ManufacturerName));
+            tyreDetails.Append(string.Format("Air Pressure: {0} (Max: {1})", m_CurrentAirPressure, m_MaxAirPressure));
+
+            return tyreDetails.ToString();
         }
     }
 }

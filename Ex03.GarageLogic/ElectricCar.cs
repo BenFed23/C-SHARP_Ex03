@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
 
 namespace Ex03.GarageLogic
@@ -6,9 +7,18 @@ namespace Ex03.GarageLogic
     internal class ElectricCar: Car
     {
         protected ElectricSource m_ElectricSource;
+
         public ElectricCar(string i_idPlate, string i_ModelName): base( i_idPlate, i_ModelName)
         {
             m_ElectricSource = new ElectricSource(4.6f);
+        }
+
+        public override float MaxEnergyCapacity
+        {
+            get
+            {
+                return m_ElectricSource.MaxCapacity;
+            }
         }
 
         public override void Charge(float i_AmountOfMinutesToCharge)
@@ -21,7 +31,7 @@ namespace Ex03.GarageLogic
         {
             List<string> specialParametes = GetCarBaseParameters();
      
-            specialParametes.Add("float currentBatteryTimeInHours");
+            specialParametes.Add("current battery time in hours");
 
             return specialParametes;
         }
@@ -40,10 +50,13 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            string ElectricCarDetails = base.ToString();
-            ElectricCarDetails += m_ElectricSource.ToString();
+            StringBuilder electricCarDetails = new StringBuilder();
 
-            return ElectricCarDetails;
+            electricCarDetails.AppendLine(base.ToString());
+            electricCarDetails.AppendLine("*** Engine Details: ***");
+            electricCarDetails.AppendLine(m_ElectricSource.ToString());
+
+            return electricCarDetails.ToString();
         }
     }
 }

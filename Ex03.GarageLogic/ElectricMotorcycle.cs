@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
-
 
 namespace Ex03.GarageLogic
 {
@@ -13,16 +13,25 @@ namespace Ex03.GarageLogic
             m_ElectricSource = new ElectricSource(3.0f);
         }
 
+        public override float MaxEnergyCapacity
+        {
+            get
+            {
+                return m_ElectricSource.MaxCapacity;
+            }
+        }
+
         public override void Charge(float i_AmountOfMinutesToCharge)
         {
             m_ElectricSource.chargeElectricVehicle(i_AmountOfMinutesToCharge / 60f);
+            m_energyPercentages = (m_ElectricSource.CurrentAmount / m_ElectricSource.MaxCapacity) * 100;
         }
 
         public override List<string> GetSpecialPrameters() 
         {
             List<string> specialParameters = GetMotorcycleBaseParameters();
 
-            specialParameters.Add("float currentBatteryTimeInHours");
+            specialParameters.Add("current battery time in hours");
 
             return specialParameters;
         }
@@ -38,12 +47,16 @@ namespace Ex03.GarageLogic
             m_ElectricSource.CurrentAmount = currentBattery;
             m_energyPercentages = m_ElectricSource.EnergyPercentage;
         }
+
         public override string ToString()
         {
-            string motorcycleDetails = base.ToString();
-            motorcycleDetails += m_ElectricSource.ToString();
+            StringBuilder electricMotorcycleDetails = new StringBuilder();
 
-            return motorcycleDetails;
+            electricMotorcycleDetails.AppendLine(base.ToString());
+            electricMotorcycleDetails.AppendLine("*** Engine Details: ***");
+            electricMotorcycleDetails.AppendLine(m_ElectricSource.ToString());
+
+            return electricMotorcycleDetails.ToString();
         }
     }
 }

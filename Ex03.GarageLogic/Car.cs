@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 
@@ -49,12 +50,23 @@ namespace Ex03.GarageLogic
             m_carColor = carColor;
             m_numOfDoors = numberOfDoors;
         }
+
         public override string ToString()
         {
-            string carDetails =  base.ToString();
-            carDetails += " " + "Car color: " + m_carColor.ToString() + " " + "Num of doors: " + m_numOfDoors.ToString();
+            StringBuilder carDetails = new StringBuilder();
 
-            return carDetails;
+            carDetails.AppendLine(base.ToString());
+            carDetails.AppendLine(string.Format("Car Color: {0}", m_carColor));
+            carDetails.AppendLine(string.Format("Number of Doors: {0}", m_numOfDoors));
+
+            if (m_tyresCollection != null && m_tyresCollection.Length > 0)
+            {
+                carDetails.AppendLine(string.Format("Wheels Information ({0} wheels):", m_tyresCollection.Length));
+                carDetails.AppendLine(m_tyresCollection[0].ToString());
+
+            }
+
+            return carDetails.ToString();
         }
     }
 

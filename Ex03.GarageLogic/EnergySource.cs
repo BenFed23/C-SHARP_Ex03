@@ -9,6 +9,14 @@ namespace Ex03.GarageLogic
         protected float m_CurrentEnergyAmount;
         protected float m_MaxEnergyAmount;
 
+        protected virtual string UnitName
+        {
+            get
+            {
+                return "";
+            }
+        }
+
         protected EnergySource(float i_MaxEnergyAmount)
         {
             m_MaxEnergyAmount = i_MaxEnergyAmount;
@@ -37,7 +45,7 @@ namespace Ex03.GarageLogic
             {
                 if (value > m_MaxEnergyAmount || value < 0)
                 {
-                    throw new ValueRangeException(0, m_MaxEnergyAmount, $"Invalid energy amount. Max allowed is {m_MaxEnergyAmount}");
+                    throw new ValueRangeException(0, m_MaxEnergyAmount, string.Format("Invalid energy amount. Max allowed is {0} {1}", m_MaxEnergyAmount, UnitName));
                 }
 
                 m_CurrentEnergyAmount = value;
@@ -64,14 +72,13 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return (m_CurrentEnergyAmount/ m_CurrentEnergyAmount) * 100;
+                return (m_CurrentEnergyAmount/ m_MaxEnergyAmount) * 100;
             }
         }
+
         public override string ToString()
         {
-            string EnergySourceDetails = " " + "Current energy amount:  " + m_CurrentEnergyAmount.ToString() + " " + "Max enegy capacity: " + m_MaxEnergyAmount.ToString();
-
-            return EnergySourceDetails;
+            return string.Format("Current amount: {0} {1}, Max capacity: {2} {1}", m_CurrentEnergyAmount, UnitName, m_MaxEnergyAmount);
         }
     }
 }

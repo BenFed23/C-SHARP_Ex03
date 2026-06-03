@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
 
 namespace Ex03.GarageLogic
@@ -11,16 +12,26 @@ namespace Ex03.GarageLogic
         {
             m_FuelSource = new FuelSource(5.6f, eFuelType.Octan98);
         }
+
+        public override float MaxEnergyCapacity
+        {
+            get
+            {
+                return m_FuelSource.MaxCapacity;
+            }
+        }
+
         public override void Refuel(float i_AmountOfFuelToAdd, eFuelType i_FuelType)
         {
             m_FuelSource.RefuelVehicle(i_AmountOfFuelToAdd, i_FuelType);
+            m_energyPercentages = (m_FuelSource.CurrentAmount / m_FuelSource.MaxCapacity) * 100;
         }
 
         public override List<string> GetSpecialPrameters()
         {
             List<string> specialParameters = GetMotorcycleBaseParameters();
 
-            specialParameters.Add("float currentFuelAmountInLiters");
+            specialParameters.Add("current fuel amount in liters");
 
             return specialParameters;
         }
@@ -41,11 +52,16 @@ namespace Ex03.GarageLogic
             m_FuelSource.CurrentAmount = currentFuelAmount;
             m_energyPercentages = m_FuelSource.EnergyPercentage;
         }
+
         public override string ToString()
         {
-            string fuelMotorcycleDetails = base.ToString() + " " + m_FuelSource.ToString();
+            StringBuilder fuelMotorcycleDetails = new StringBuilder();
 
-            return fuelMotorcycleDetails;
+            fuelMotorcycleDetails.AppendLine(base.ToString());
+            fuelMotorcycleDetails.AppendLine("*** Engine Details: ***");
+            fuelMotorcycleDetails.Append(m_FuelSource.ToString());
+
+            return fuelMotorcycleDetails.ToString();
         }
     }
 }

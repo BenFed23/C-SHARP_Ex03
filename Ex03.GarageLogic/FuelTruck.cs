@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
-
 
 namespace Ex03.GarageLogic
 {
@@ -10,7 +10,7 @@ namespace Ex03.GarageLogic
         private float m_CargoVolume;
         protected FuelSource m_FuelSource;
         private const int k_AmountOfWheels = 14;
-        private const int k_MaxAirPressure = 23;
+        private const int k_MaxAirPressure = 28;
 
         public FuelTruck(string i_ModelName, string i_LicensePlateNumber) : base(i_ModelName, i_LicensePlateNumber)
         {
@@ -18,9 +18,17 @@ namespace Ex03.GarageLogic
             for (int i = 0; i < m_tyresCollection.Length; i++)
             {
                 m_tyresCollection[i] = new Tyre(k_MaxAirPressure);
-                m_FuelSource = new FuelSource(125, eFuelType.Soler);
+                m_FuelSource = new FuelSource(125f, eFuelType.Soler);
                 m_HasRefrigeratedCargo = false;
                 m_CargoVolume = 0;
+            }
+        }
+
+        public override float MaxEnergyCapacity
+        {
+            get
+            {
+                return m_FuelSource.MaxCapacity;
             }
         }
 
@@ -34,9 +42,9 @@ namespace Ex03.GarageLogic
         {
             List<string> specialParameters = new List<string>();
 
-            specialParameters.Add("bool isRefrigerated");
-            specialParameters.Add("float cargoVolume");
-            specialParameters.Add("float currentFuelAmountInLiters");
+            specialParameters.Add("if it has refrigerated cargo");
+            specialParameters.Add("cargo volume");
+            specialParameters.Add("current fuel amount in liters");
 
             return specialParameters;
         }
@@ -71,10 +79,21 @@ namespace Ex03.GarageLogic
        
         public override string ToString()
         {
-            string vehicleDetails = base.ToString();
-            vehicleDetails += " " + "Cargo volum: " + m_CargoVolume + " " + "Has frozen cargo: " + m_HasRefrigeratedCargo + " " + m_FuelSource.ToString();
+            StringBuilder truckDetails = new StringBuilder();
 
-            return vehicleDetails;
+            truckDetails.AppendLine(base.ToString());
+            truckDetails.AppendLine(string.Format("Has Refrigerated Cargo: {0}", m_HasRefrigeratedCargo ? "Yes" : "No"));
+            truckDetails.AppendLine(string.Format("Cargo Volume: {0}", m_CargoVolume));
+            if (m_tyresCollection != null && m_tyresCollection.Length > 0)
+            {
+                truckDetails.AppendLine(string.Format("Wheels Information ({0} wheels):", m_tyresCollection.Length));
+                truckDetails.AppendLine(m_tyresCollection[0].ToString());
+            }
+
+            truckDetails.AppendLine("*** Engine Details: ***");
+            truckDetails.Append(m_FuelSource.ToString());
+
+            return truckDetails.ToString();
         }
     }
 }

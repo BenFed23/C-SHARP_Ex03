@@ -1,4 +1,5 @@
-﻿using System;   
+﻿using System;
+using System.Text;
 
 namespace Ex03.GarageLogic
 {
@@ -31,9 +32,21 @@ namespace Ex03.GarageLogic
         {
             return m_VehicleStatus;
         }
+
         public override string ToString()
         {
-            return r_Vehicle.ToString() + " " + "Owner name: " +  m_OwnerName + " " + "Vehicele status: " + m_VehicleStatus.ToString();
+            StringBuilder garageVehicleDetails = new StringBuilder();
+
+            garageVehicleDetails.AppendLine("*** Garage Management Information ***");
+            garageVehicleDetails.AppendLine(string.Format("Owner Name: {0}", m_OwnerName));
+            garageVehicleDetails.AppendLine(string.Format("Owner Phone: {0}", m_OwnerPhone));
+            garageVehicleDetails.AppendLine(string.Format("Vehicle Status: {0}", m_VehicleStatus));
+            garageVehicleDetails.AppendLine();
+
+            garageVehicleDetails.AppendLine("*** Technical Vehicle Details ***");
+            garageVehicleDetails.Append(r_Vehicle.ToString());
+
+            return garageVehicleDetails.ToString();
         }
     }
 }
