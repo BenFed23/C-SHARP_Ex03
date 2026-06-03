@@ -115,7 +115,7 @@ Enter your choice: ";
             try
             {
                 m_GarageManager.FillAirInVehicleTyresToMax(licensePlate);
-                Console.WriteLine("All tires have been inflated to their maximum air pressure successfully");
+                Console.WriteLine("All tires have been inflated to their maximum air pressure successfully!");
             }
             catch(ArgumentException argumentException)
             {
@@ -131,6 +131,7 @@ Enter your choice: ";
                 getChangeStateValuesFromUser(out string vehicleLicenseNumber, out string newVehicleState);
                 Enum.TryParse(newVehicleState, out eGarageStatus newGarageVehicleStatus);
                 m_GarageManager.ChangeStateOfGarageVehicle(vehicleLicenseNumber, newGarageVehicleStatus);
+                Console.WriteLine($"Vehicle status changed to {newGarageVehicleStatus} successfully!");
             }
             catch (ArgumentException argumentException)
             {
@@ -155,6 +156,7 @@ Enter your choice: ";
                 Enum.TryParse(stringFuelType, out eFuelType fuelType);
                 float.TryParse(stringAmountOfFuelToAdd, out float amountOfFuelToAdd);
                 m_GarageManager.RefuelVehicle(vehicleLicenseNumber, fuelType, amountOfFuelToAdd);
+                Console.WriteLine($"Added {amountOfFuelToAdd} amount of fuel");
             }
             catch (ArgumentException argumentException)
             {
@@ -169,6 +171,7 @@ Enter your choice: ";
                 getChargeValuesFromUser(out string vehicleLicenseNumber, out string stringAmountOfMinutesToAdd);
                 float.TryParse(stringAmountOfMinutesToAdd, out float amountOfMinutesToAdd);
                 m_GarageManager.ChargeVehicle(vehicleLicenseNumber, amountOfMinutesToAdd);
+                Console.WriteLine($"Charged {amountOfMinutesToAdd} Minutes");
             }
             catch (ArgumentException argumentException)
             {
@@ -200,6 +203,7 @@ Enter your choice: ";
             try
             {
                 getNewVehicleFromUser();
+                Console.WriteLine("Vehicle added to garage successfully!");
             }
             catch (ArgumentException argumentException)
             {
@@ -234,7 +238,6 @@ Enter your choice: ";
             newVehicle.SetSpecialParameters(specialUserAnswers);
             getOwnerDetails(out string ownerName, out string ownerPhone);
             m_GarageManager.AddVehicleToGarage(newVehicle, ownerName, ownerPhone);
-            Console.WriteLine("\nVehicle added to garage successfully!");
         }
 
         private string getValidatedVehicleType()
