@@ -17,7 +17,6 @@ namespace Ex03.GarageLogic
 
         public override void Refuel(float i_AmountOfFuelToAdd, eFuelType i_FuelType)
         {
-
             m_FuelSource.RefuelVehicle(i_AmountOfFuelToAdd, i_FuelType);
             m_energyPercentages = (m_FuelSource.CurrentAmount/m_FuelSource.MaxCapacity)*100; 
         }

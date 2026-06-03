@@ -16,6 +16,7 @@ namespace Ex03.GarageLogic
         public override void Charge(float i_AmountOfMinutesToCharge)
         {
             m_ElectricSource.chargeElectricVehicle(i_AmountOfMinutesToCharge / 60f);
+            m_energyPercentages = (m_ElectricSource.CurrentAmount / m_ElectricSource.MaxCapacity) * 100;
         }
 
         public override List<string> GetSpecialPrameters() 

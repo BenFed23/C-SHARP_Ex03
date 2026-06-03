@@ -64,7 +64,7 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return (m_CurrentEnergyAmount/ m_CurrentEnergyAmount) * 100;
+                return (m_CurrentEnergyAmount/ m_MaxEnergyAmount) * 100;
             }
         }
         public override string ToString()
