@@ -1,4 +1,4 @@
-﻿using Ex03.GarageLogic;
+using Ex03.GarageLogic;
 using System;
 using System.Collections.Generic;
 
@@ -12,6 +12,7 @@ namespace Ex03.ConsoleUI
         {
             m_GarageManager = i_garageManager;
         }
+
         public void DisplayGarageMenu()
         {
             bool isExitPressed = false;
@@ -44,18 +45,18 @@ namespace Ex03.ConsoleUI
         private void printMenuOptions()
         {
             string menuTemplate = @"*** Welcome to the Garage Management System ***
-        Please choose one of the following options:
-        1. Load vehicles data from file
-        2. Add a new vehicle to the garage
-        3. Display license numbers of vehicles in the garage
-        4. Change a vehicle's status in garage
-        5. Inflate tires to maximum air pressure
-        6. Refuel a fuel-powered vehicle
-        7. Charge an electric vehicle
-        8. Display full vehicle information
-        9. Exit
+Please choose one of the following options:
+1. Load vehicle data from file
+2. Add a new vehicle to the garage
+3. Display license numbers of vehicles in the garage
+4. Change a vehicle's status in garage
+5. Inflate tires to maximum air pressure
+6. Refuel a fuel-powered vehicle
+7. Charge an electric vehicle
+8. Display full vehicle information
+9. Exit
 
-        Enter your choice: ";
+Enter your choice: ";
 
             Console.Write(menuTemplate);
         }
@@ -79,6 +80,7 @@ namespace Ex03.ConsoleUI
                     executeChangeVehicleState();
                     break;
                 case eMenuOptions.InflateTiresToMaxAirPressure:
+                    executeInflateTiresToMax();
                     break;
                 case eMenuOptions.RefuelVehicle:
                     executeRefuelOption();
@@ -94,6 +96,29 @@ namespace Ex03.ConsoleUI
                     io_IsExitPressed = true;
                     break;
             }
+        }
+
+        private void executeInflateTiresToMax()
+        {
+            Console.WriteLine("Please enter the vehicle's license plate number:");
+            string licensePlate = Console.ReadLine();
+
+            try
+            {
+                m_GarageManager.FillAirInVehicleTyresToMax(licensePlate);
+                Console.WriteLine("All tires have been inflated to their maximum air pressure successfully");
+            }
+            catch(ArgumentException argumentException)
+            {
+                Console.WriteLine("Error: {0}", argumentException.Message);
+            }
+        }
+
+        private void executeLoadData()
+        {
+            string[] vehicleData = m_GarageManager.loadVehicleDataBase();
+            Console.WriteLine("Loaded data from DB file successfully");
+
         }
 
         private void executeChangeVehicleState()
@@ -188,7 +213,7 @@ namespace Ex03.ConsoleUI
             {
                 Console.WriteLine($"Vehicle with license plate number: {userLicensePlateNumberInput} is already in Garage. Updated status to 'In Repair'.");
             }
-            else //second chance?
+            else
             {
                 getVehicleDataFromUser(userLicensePlateNumberInput);
             }
@@ -250,7 +275,7 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        public void ShowPlateLiscenseAccordingToState(eGarageStatus i_carStatus)
+        public void ShowPlateLicenseAccordingToState(eGarageStatus i_carStatus)
         {
             List<string> carPlatesWithGivenState = new List<string>();
             Dictionary<string, GarageVehicle> garageDictionary = m_GarageManager.GetDictionary();
@@ -330,10 +355,6 @@ namespace Ex03.ConsoleUI
                     }
                     break;
             }
-           
-
-
-        }
-       
+        }      
     }
 }
