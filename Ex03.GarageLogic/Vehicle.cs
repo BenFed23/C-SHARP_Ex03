@@ -6,21 +6,21 @@ namespace Ex03.GarageLogic
 {
     public abstract class Vehicle
     {
-        private string m_modelName;
-        private string m_licensePlateNumber;
-        protected float m_energyPercentages;
-        protected Tyre[] m_tyresCollection;
+        private string m_ModelName;
+        private string m_LicensePlateNumber;
+        protected float m_EnergyPercentages;
+        protected Tyre[] m_TyresCollection;
 
         public Vehicle(string i_LicensePlateNumber, string i_ModelName)
         {
-            m_modelName = i_ModelName;
-            m_licensePlateNumber = i_LicensePlateNumber;
-            m_energyPercentages = 100;
-            m_tyresCollection = null;
+            m_ModelName = i_ModelName;
+            m_LicensePlateNumber = i_LicensePlateNumber;
+            m_EnergyPercentages = 100;
+            m_TyresCollection = null;
         }
         public Tyre[] GetTyresColaction()
         {
-            return m_tyresCollection;
+            return m_TyresCollection;
         }
 
         public abstract float MaxEnergyCapacity 
@@ -28,9 +28,9 @@ namespace Ex03.GarageLogic
             get;
         }
 
-        public string getVehicleLicensePlateNumber()
+        public string GetVehicleLicensePlateNumber()
         {
-            return m_licensePlateNumber;
+            return m_LicensePlateNumber;
         }
 
         public virtual void Refuel(float i_AmountOfFuelToAdd, eFuelType i_FuelType)
@@ -45,7 +45,7 @@ namespace Ex03.GarageLogic
 
         public void SetTyreDetails(string i_ManufacturerName, float i_CurrentAirPressure)
         {
-            foreach (Tyre tyre in m_tyresCollection)
+            foreach (Tyre tyre in m_TyresCollection)
             {
                 tyre.ManufacturerName = i_ManufacturerName;
                 tyre.CurrentAirPressure = i_CurrentAirPressure;
@@ -73,15 +73,15 @@ namespace Ex03.GarageLogic
                 throw new FormatException("Air pressure must be a valid number.");
             }
 
-            m_modelName = modelName;
-            foreach (Tyre tyre in m_tyresCollection)
+            m_ModelName = modelName;
+            foreach (Tyre tyre in m_TyresCollection)
             {
                 tyre.ManufacturerName = manufacturer;
                 tyre.CurrentAirPressure = airPressure;
             }
         }
 
-        public abstract List<string> GetSpecialPrameters();
+        public abstract List<string> GetSpecialParameters();
 
         public abstract void SetSpecialParameters(List<string> i_Parameters);
 
@@ -89,12 +89,11 @@ namespace Ex03.GarageLogic
         {
             StringBuilder vehicleDetails = new StringBuilder();
 
-            vehicleDetails.AppendLine(string.Format("License Plate: {0}", m_licensePlateNumber));
-            vehicleDetails.AppendLine(string.Format("Model Name: {0}", m_modelName));
-            vehicleDetails.Append(string.Format("Energy Percentage: {0}%", (int)m_energyPercentages));
+            vehicleDetails.AppendLine(string.Format("License Plate: {0}", m_LicensePlateNumber));
+            vehicleDetails.AppendLine(string.Format("Model Name: {0}", m_ModelName));
+            vehicleDetails.Append(string.Format("Energy Percentage: {0}%", (int)m_EnergyPercentages));
 
             return vehicleDetails.ToString();
         }
-
     }
 }

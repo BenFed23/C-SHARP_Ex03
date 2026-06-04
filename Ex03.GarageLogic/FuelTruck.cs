@@ -14,10 +14,10 @@ namespace Ex03.GarageLogic
 
         public FuelTruck(string i_ModelName, string i_LicensePlateNumber) : base(i_ModelName, i_LicensePlateNumber)
         {
-            m_tyresCollection = new Tyre[k_AmountOfWheels];
-            for (int i = 0; i < m_tyresCollection.Length; i++)
+            m_TyresCollection = new Tyre[k_AmountOfWheels];
+            for (int i = 0; i < m_TyresCollection.Length; i++)
             {
-                m_tyresCollection[i] = new Tyre(k_MaxAirPressure);
+                m_TyresCollection[i] = new Tyre(k_MaxAirPressure);
                 m_FuelSource = new FuelSource(125f, eFuelType.Soler);
                 m_HasRefrigeratedCargo = false;
                 m_CargoVolume = 0;
@@ -35,10 +35,10 @@ namespace Ex03.GarageLogic
         public override void Refuel(float i_AmountOfFuelToAdd, eFuelType i_FuelType)
         {
             m_FuelSource.RefuelVehicle(i_AmountOfFuelToAdd, i_FuelType);
-            m_energyPercentages = (m_FuelSource.CurrentAmount / m_FuelSource.MaxCapacity) * 100;
+            m_EnergyPercentages = (m_FuelSource.CurrentAmount / m_FuelSource.MaxCapacity) * 100;
         }
 
-        public override List<string> GetSpecialPrameters()
+        public override List<string> GetSpecialParameters()
         {
             List<string> specialParameters = new List<string>();
 
@@ -74,7 +74,7 @@ namespace Ex03.GarageLogic
             m_HasRefrigeratedCargo = isRefrigerated;
             m_CargoVolume = cargoVolume;
             m_FuelSource.CurrentAmount = currentFuelAmount;
-            m_energyPercentages = m_FuelSource.EnergyPercentage;
+            m_EnergyPercentages = m_FuelSource.EnergyPercentage;
         }
        
         public override string ToString()
@@ -84,10 +84,10 @@ namespace Ex03.GarageLogic
             truckDetails.AppendLine(base.ToString());
             truckDetails.AppendLine(string.Format("Has Refrigerated Cargo: {0}", m_HasRefrigeratedCargo ? "Yes" : "No"));
             truckDetails.AppendLine(string.Format("Cargo Volume: {0}", m_CargoVolume));
-            if (m_tyresCollection != null && m_tyresCollection.Length > 0)
+            if (m_TyresCollection != null && m_TyresCollection.Length > 0)
             {
-                truckDetails.AppendLine(string.Format("Wheels Information ({0} wheels):", m_tyresCollection.Length));
-                truckDetails.AppendLine(m_tyresCollection[0].ToString());
+                truckDetails.AppendLine(string.Format("Wheels Information ({0} wheels):", m_TyresCollection.Length));
+                truckDetails.AppendLine(m_TyresCollection[0].ToString());
             }
 
             truckDetails.AppendLine("*** Engine Details: ***");

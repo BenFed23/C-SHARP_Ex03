@@ -8,7 +8,7 @@ namespace Ex03.GarageLogic
     {
         protected ElectricSource m_ElectricSource;
 
-        public ElectricCar(string i_idPlate, string i_ModelName): base( i_idPlate, i_ModelName)
+        public ElectricCar(string i_IdPlate, string i_ModelName): base( i_IdPlate, i_ModelName)
         {
             m_ElectricSource = new ElectricSource(4.6f);
         }
@@ -23,17 +23,17 @@ namespace Ex03.GarageLogic
 
         public override void Charge(float i_AmountOfMinutesToCharge)
         {
-            m_ElectricSource.chargeElectricVehicle(i_AmountOfMinutesToCharge / 60f);
-            m_energyPercentages = (m_ElectricSource.CurrentAmount / m_ElectricSource.MaxCapacity) * 100;
+            m_ElectricSource.ChargeElectricVehicle(i_AmountOfMinutesToCharge / 60f);
+            m_EnergyPercentages = (m_ElectricSource.CurrentAmount / m_ElectricSource.MaxCapacity) * 100;
         }
 
-        public override List<string> GetSpecialPrameters() 
+        public override List<string> GetSpecialParameters() 
         {
-            List<string> specialParametes = GetCarBaseParameters();
+            List<string> specialParameters = GetCarBaseParameters();
      
-            specialParametes.Add("current battery time in hours");
+            specialParameters.Add("current battery time in hours");
 
-            return specialParametes;
+            return specialParameters;
         }
 
         public override void SetSpecialParameters(List<string> i_SpecialParameters)
@@ -45,7 +45,7 @@ namespace Ex03.GarageLogic
             }
            
             m_ElectricSource.CurrentAmount = currentBatteryTime;
-            m_energyPercentages = m_ElectricSource.EnergyPercentage;
+            m_EnergyPercentages = m_ElectricSource.EnergyPercentage;
         }
 
         public override string ToString()

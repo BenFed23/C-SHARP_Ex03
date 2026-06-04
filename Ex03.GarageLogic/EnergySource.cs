@@ -9,18 +9,18 @@ namespace Ex03.GarageLogic
         protected float m_CurrentEnergyAmount;
         protected float m_MaxEnergyAmount;
 
+        protected EnergySource(float i_MaxEnergyAmount)
+        {
+            m_MaxEnergyAmount = i_MaxEnergyAmount;
+            m_CurrentEnergyAmount = 0;
+        }
+
         protected virtual string UnitName
         {
             get
             {
                 return "";
             }
-        }
-
-        protected EnergySource(float i_MaxEnergyAmount)
-        {
-            m_MaxEnergyAmount = i_MaxEnergyAmount;
-            m_CurrentEnergyAmount = 0;
         }
 
         public float MaxCapacity

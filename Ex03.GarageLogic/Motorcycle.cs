@@ -13,10 +13,10 @@ namespace Ex03.GarageLogic
 
         public Motorcycle(string i_LicensePlateNumber, string i_ModelName) : base(i_LicensePlateNumber, i_ModelName)
         {
-           m_tyresCollection = new Tyre[k_AmountOfWheels];
-            for (int i = 0; i<m_tyresCollection.Length;i++ )
+           m_TyresCollection = new Tyre[k_AmountOfWheels];
+            for (int i = 0; i<m_TyresCollection.Length;i++ )
             {
-                m_tyresCollection[i] = new Tyre(k_MaxAirPressure);
+                m_TyresCollection[i] = new Tyre(k_MaxAirPressure);
             } 
         }
 
@@ -54,10 +54,10 @@ namespace Ex03.GarageLogic
             motorcycleDetails.AppendLine(base.ToString());
             motorcycleDetails.AppendLine(string.Format("License Type: {0}", m_LicenseType));
             motorcycleDetails.AppendLine(string.Format("Engine Volume: {0}", m_EngineVolume));
-            if (m_tyresCollection != null && m_tyresCollection.Length > 0)
+            if (m_TyresCollection != null && m_TyresCollection.Length > 0)
             {
-                motorcycleDetails.AppendLine(string.Format("Wheels Information ({0} wheels):", m_tyresCollection.Length));
-                motorcycleDetails.AppendLine(m_tyresCollection[0].ToString());
+                motorcycleDetails.AppendLine(string.Format("Wheels Information ({0} wheels):", m_TyresCollection.Length));
+                motorcycleDetails.AppendLine(m_TyresCollection[0].ToString());
             }
 
             return motorcycleDetails.ToString();
