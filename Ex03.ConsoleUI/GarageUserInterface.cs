@@ -8,9 +8,9 @@ namespace Ex03.ConsoleUI
     {
         private GarageManager m_GarageManager;
 
-        public GarageUserInterface(GarageManager i_garageManager)
+        public GarageUserInterface(GarageManager i_GarageManager)
         {
-            m_GarageManager = i_garageManager;
+            m_GarageManager = i_GarageManager;
         }
 
         public void DisplayGarageMenu()
@@ -24,7 +24,7 @@ namespace Ex03.ConsoleUI
 
                 try
                 {
-                    if (!Enum.TryParse(userChoiceInput, out eMenuOptions userChoice))
+                    if (!Enum.TryParse(userChoiceInput, out eMenuOption userChoice))
                     {
                         throw new FormatException("You must choose a number from menu");
                     }
@@ -60,7 +60,7 @@ Enter your choice: ";
 
             Console.Write(menuTemplate);
         }
-        private void executeUserChoice(eMenuOptions i_UserMenuChoice, ref bool io_IsExitPressed)
+        private void executeUserChoice(eMenuOption i_UserMenuChoice, ref bool io_IsExitPressed)
         {
             try
             {
@@ -68,31 +68,31 @@ Enter your choice: ";
 
                 switch (i_UserMenuChoice)
                 {
-                    case eMenuOptions.LoadDataFromDBFile:
-                        loadDataBaseIntoGarageData();
+                    case eMenuOption.LoadDataFromDBFile:
+                        LoadDataBaseIntoGarageData();
                         break;
-                    case eMenuOptions.AddNewVehicleToGarage:
+                    case eMenuOption.AddNewVehicleToGarage:
                         executeAddNewVehicle();
                         break;
-                    case eMenuOptions.ShowListOfLicensePlateNumbers:
+                    case eMenuOption.ShowListOfLicensePlateNumbers:
                         ManageVehicleListPresentation();
                         break;
-                    case eMenuOptions.ChangeVehicleStateInGarage:
+                    case eMenuOption.ChangeVehicleStateInGarage:
                         executeChangeVehicleState();
                         break;
-                    case eMenuOptions.InflateTiresToMaxAirPressure:
+                    case eMenuOption.InflateTiresToMaxAirPressure:
                         executeInflateTiresToMax();
                         break;
-                    case eMenuOptions.RefuelVehicle:
+                    case eMenuOption.RefuelVehicle:
                         executeRefuelOption();
                         break;
-                    case eMenuOptions.ChargeVehicle:
+                    case eMenuOption.ChargeVehicle:
                         executeChargeOption();
                         break;
-                    case eMenuOptions.ShowFullVehicleDetails:
+                    case eMenuOption.ShowFullVehicleDetails:
                         ShowVehicleDetails();
                         break;
-                    case eMenuOptions.Exit:
+                    case eMenuOption.Exit:
                         io_IsExitPressed = true;
                         break;
                 }
@@ -119,7 +119,7 @@ Enter your choice: ";
                 m_GarageManager.FillAirInVehicleTyresToMax(licensePlate);
                 Console.WriteLine("All tires have been inflated to their maximum air pressure isTooMuchAirsfully!");
             }
-            catch(ArgumentException argumentException)
+            catch (ArgumentException argumentException)
             {
                 Console.WriteLine("Error: {0}", argumentException.Message);
             }
@@ -235,7 +235,7 @@ Enter your choice: ";
             List<string> baseParameters = newVehicle.GetBaseVehicleParameters();
             List<string> baseUserAnswers = getVehicleParametersFromUser(baseParameters);
             newVehicle.SetBaseVehicleParameters(baseUserAnswers);
-            List<string> specialParameters = newVehicle.GetSpecialPrameters(); 
+            List<string> specialParameters = newVehicle.GetSpecialParameters();
             List<string> specialUserAnswers = getVehicleParametersFromUser(specialParameters);
             newVehicle.SetSpecialParameters(specialUserAnswers);
             getOwnerDetails(out string ownerName, out string ownerPhone);
@@ -274,8 +274,8 @@ Enter your choice: ";
 
             Console.WriteLine("Please enter owner's phone number:");
             o_OwnerPhone = Console.ReadLine();
-        }  
-        
+        }
+
         public void ShowPlateList()
         {
             Dictionary<string, GarageVehicle> garageDictionary = m_GarageManager.GetDictionary();
@@ -292,14 +292,14 @@ Enter your choice: ";
             }
         }
 
-        public void ShowPlateLicenseAccordingToState(eGarageStatus i_carStatus)
+        public void ShowPlateLicenseAccordingToState(eGarageStatus i_CarStatus)
         {
             List<string> carPlatesWithGivenState = new List<string>();
             Dictionary<string, GarageVehicle> garageDictionary = m_GarageManager.GetDictionary();
-          
+
             foreach (KeyValuePair<string, GarageVehicle> car in garageDictionary)
             {
-                if (car.Value.GetVehicleStatus() == i_carStatus)
+                if (car.Value.GetVehicleStatus() == i_CarStatus)
                 {
                     carPlatesWithGivenState.Add(car.Key);
                 }
@@ -311,31 +311,32 @@ Enter your choice: ";
             }
             else
             {
-                Console.WriteLine($"No Vehicles in '{i_carStatus}' status in the garage");
+                Console.WriteLine($"No Vehicles in '{i_CarStatus}' status in the garage");
             }
         }
 
-        public void PrintGivenList(List<string> i_givenList)
+        public void PrintGivenList(List<string> i_GivenList)
         {
-            foreach (string value in i_givenList)
+            foreach (string value in i_GivenList)
             {
                 Console.WriteLine(value);
             }
         }
-        
+
         public List<string> GetVehicleParameters(string i_VehicleType)
         {
+            List<string> vehicleParameters = null;
             Vehicle currentVehicle = VehicleCreator.CreateVehicle(i_VehicleType, null, null);
-            Type vehicleType = currentVehicle.GetType();
-
-            if (vehicleType.IsSubclassOf(typeof(Vehicle)))
+            if (currentVehicle != null && currentVehicle is Vehicle)
             {
-                return null;
+                vehicleParameters = null;
             }
             else
             {
                 throw new ArgumentException("You entered an invalid vehicle type");
             }
+
+            return vehicleParameters;
         }
 
         public void ShowVehicleDetails()
@@ -351,22 +352,22 @@ Enter your choice: ";
                 Console.WriteLine("The License Plate is not in the System.");
             }
         }
-           
-        public void loadDataBaseIntoGarageData()
+
+        public void LoadDataBaseIntoGarageData()
         {
-            m_GarageManager.loadVehicleDataBase();
+            m_GarageManager.LoadVehicleDataBase();
             Console.Clear();
             Console.WriteLine(m_GarageManager.GetDictionary().Count.ToString() + " " + "Vehicles" + " " + "were loaded to the System ");
         }
 
-        public void ManageVehicleListPresentation() 
+        public void ManageVehicleListPresentation()
         {
             Console.Clear();
             Console.WriteLine("choose 0 to see full list or 1 to see the filtered list ");
             int userChoise = int.Parse(Console.ReadLine());
             switch (userChoise)
             {
-                case (int) eFillterUserChoice.All:
+                case (int)eFillterUserChoice.All:
                     Console.Clear();
                     ShowPlateList();
                     break;
@@ -374,7 +375,7 @@ Enter your choice: ";
                     Console.WriteLine("Write the car state to filter by: InRepair, Repaired, FullyPayed");
                     if (Enum.TryParse(Console.ReadLine(), out eGarageStatus statusFilter))
                     {
-                        Console.Clear() ;
+                        Console.Clear();
                         ShowPlateLicenseAccordingToState(statusFilter);
                     }
                     else
@@ -383,6 +384,6 @@ Enter your choice: ";
                     }
                     break;
             }
-        }      
+        }
     }
 }

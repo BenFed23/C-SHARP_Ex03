@@ -23,11 +23,11 @@ namespace Ex03.GarageLogic
 
         public override void Charge(float i_AmountOfMinutesToCharge)
         {
-            m_ElectricSource.chargeElectricVehicle(i_AmountOfMinutesToCharge / 60f);
-            m_energyPercentages = (m_ElectricSource.CurrentAmount / m_ElectricSource.MaxCapacity) * 100;
+            m_ElectricSource.ChargeElectricVehicle(i_AmountOfMinutesToCharge / 60f);
+            m_EnergyPercentages = (m_ElectricSource.CurrentAmount / m_ElectricSource.MaxCapacity) * 100;
         }
 
-        public override List<string> GetSpecialPrameters() 
+        public override List<string> GetSpecialParameters() 
         {
             List<string> specialParameters = GetMotorcycleBaseParameters();
 
@@ -45,7 +45,7 @@ namespace Ex03.GarageLogic
             }
 
             m_ElectricSource.CurrentAmount = currentBattery;
-            m_energyPercentages = m_ElectricSource.EnergyPercentage;
+            m_EnergyPercentages = m_ElectricSource.EnergyPercentage;
         }
 
         public override string ToString()

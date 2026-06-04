@@ -15,16 +15,16 @@ namespace Ex03.GarageLogic
             m_CurrentAirPressure = 0;
         }
 
-        public bool InflateTire(float i_amountOfAirToFill) 
+        public bool InflateTire(float i_AmountOfAirToFill) 
         {
             bool isTooMuchAir = false;
-            if (m_CurrentAirPressure + i_amountOfAirToFill > m_MaxAirPressure) 
+            if (m_CurrentAirPressure + i_AmountOfAirToFill > m_MaxAirPressure) 
             {
                 isTooMuchAir = true;
             }
             else 
             {
-                m_CurrentAirPressure += i_amountOfAirToFill;
+                m_CurrentAirPressure += i_AmountOfAirToFill;
             }
 
             return isTooMuchAir;

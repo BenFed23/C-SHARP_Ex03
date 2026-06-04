@@ -2,7 +2,7 @@
 
 namespace Ex03.ConsoleUI
 {
-    public enum eMenuOptions
+    public enum eMenuOption
     {
         LoadDataFromDBFile = 1,
         AddNewVehicleToGarage = 2,

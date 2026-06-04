@@ -9,7 +9,7 @@ namespace Ex03.GarageLogic
         
         protected FuelSource m_FuelSource;
 
-        public FuelCar( string i_idPlate, string  i_ModelName) : base( i_idPlate, i_ModelName)
+        public FuelCar( string i_IdPlate, string  i_ModelName) : base( i_IdPlate, i_ModelName)
         {
             m_FuelSource = new FuelSource(51f , eFuelType.Octan95);
         }
@@ -25,10 +25,10 @@ namespace Ex03.GarageLogic
         public override void Refuel(float i_AmountOfFuelToAdd, eFuelType i_FuelType)
         {
             m_FuelSource.RefuelVehicle(i_AmountOfFuelToAdd, i_FuelType);
-            m_energyPercentages = (m_FuelSource.CurrentAmount/m_FuelSource.MaxCapacity)*100; 
+            m_EnergyPercentages = (m_FuelSource.CurrentAmount/m_FuelSource.MaxCapacity)*100; 
         }
 
-        public override List<string> GetSpecialPrameters()
+        public override List<string> GetSpecialParameters()
         {
             List<string> specialParameters = GetCarBaseParameters();
 
@@ -51,7 +51,7 @@ namespace Ex03.GarageLogic
             }
 
             m_FuelSource.CurrentAmount = currentFuelAmount;
-            m_energyPercentages = m_FuelSource.EnergyPercentage;
+            m_EnergyPercentages = m_FuelSource.EnergyPercentage;
         }
 
         public override string ToString()

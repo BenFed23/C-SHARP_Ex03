@@ -12,16 +12,15 @@ namespace Ex03.GarageLogic
         private const int k_ModelName = 2;
         private const int k_OwnerName = 6;
         private const int k_OwnerPhone = 7;
-
-        private readonly Dictionary<string, GarageVehicle> m_VehiclesInGarage = new Dictionary<string, GarageVehicle>();
+        private readonly Dictionary<string, GarageVehicle> r_VehiclesInGarage = new Dictionary<string, GarageVehicle>();
 
         public bool CheckIfVehicleInGarage(string i_LicensePlateNumber)
         {
-            bool vehicleIsInGarage = m_VehiclesInGarage.ContainsKey(i_LicensePlateNumber);
+            bool vehicleIsInGarage = r_VehiclesInGarage.ContainsKey(i_LicensePlateNumber);
 
             if (vehicleIsInGarage)
             {
-                m_VehiclesInGarage[i_LicensePlateNumber].SetVehicleStatus(eGarageStatus.InRepair);
+                r_VehiclesInGarage[i_LicensePlateNumber].SetVehicleStatus(eGarageStatus.InRepair);
             }
 
             return vehicleIsInGarage;
@@ -30,7 +29,7 @@ namespace Ex03.GarageLogic
         public void AddVehicleToGarage(Vehicle i_Vehicle, string i_OwnerName, string i_OwnerPhone)
         {
             GarageVehicle newVehicleInGarage = new GarageVehicle(i_Vehicle, i_OwnerName, i_OwnerPhone);
-            m_VehiclesInGarage.Add(i_Vehicle.getVehicleLicensePlateNumber(), newVehicleInGarage);
+            r_VehiclesInGarage.Add(i_Vehicle.GetVehicleLicensePlateNumber(), newVehicleInGarage);
         }
 
         public void ChangeStateOfGarageVehicle(string i_LicensePlateNumber, eGarageStatus i_NewGarageState)
@@ -55,7 +54,7 @@ namespace Ex03.GarageLogic
 
         public void FillAirInVehicleTyresToMax(string i_LicensePlateNumber)
         {
-            Tyre[] currentVehicleTyres = m_VehiclesInGarage[i_LicensePlateNumber].GetVehicle().GetTyresColaction();
+            Tyre[] currentVehicleTyres = r_VehiclesInGarage[i_LicensePlateNumber].GetVehicle().GetTyresColaction();
 
             foreach (Tyre tyre in currentVehicleTyres)
             {
@@ -65,7 +64,7 @@ namespace Ex03.GarageLogic
 
         private GarageVehicle getVehicleByLicensePlateNumber(string i_LicensePlateNumber)
         {
-            if (!m_VehiclesInGarage.TryGetValue(i_LicensePlateNumber, out GarageVehicle desiredGarageVehicle))
+            if (!r_VehiclesInGarage.TryGetValue(i_LicensePlateNumber, out GarageVehicle desiredGarageVehicle))
             {
                 throw new ArgumentException($"Vehicle with license number {i_LicensePlateNumber} was not found in the garage");
             }
@@ -73,7 +72,7 @@ namespace Ex03.GarageLogic
             return desiredGarageVehicle;
         }
 
-        public void loadVehicleDataBase()
+        public void LoadVehicleDataBase()
         {
             try
             {
@@ -133,7 +132,7 @@ namespace Ex03.GarageLogic
 
         public Dictionary<string, GarageVehicle>  GetDictionary() 
         {
-            return m_VehiclesInGarage;
+            return r_VehiclesInGarage;
         }
     }
 }
